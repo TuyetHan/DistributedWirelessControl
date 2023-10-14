@@ -62,6 +62,22 @@ The password of BBB: temppwd.
   ![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/7d7ba43e-c758-47a7-bfed-e8f567be06bc)
   ![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/142552ae-e788-45b4-96c6-764987ba773f)
 
+## Acknowledgements
+
+ - Change Beagle Bone Default Address:
+ ```bash
+  cd /etc/default/
+  sudo nano bb-boot
+
+  - Change USB0 Address according to your need
+```
+
+ - Error when connect 2 BBBs having same address:
+ ```bash
+  ssh-keygen -f "/home/.ssh/known_host" -R "192.168.7.2"
+
+  - Note: Need to find ssh location in your computer and replace accordingly, also "192.168.7.2" also shall be replaced by BBB default address (if you already changed it)
+```
 
 
 ## Appendix
