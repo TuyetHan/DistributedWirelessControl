@@ -58,6 +58,11 @@ The password of BBB: temppwd.
   chmode +x forte
   ./forte
 ```
+- Find the address that the router assigned to BBB: ifconfig. This address shall be configured in System Configuration before testing. This address will be changed every time BBB restart or power ON; therefore, need to be rechecked every time start testing.
+  ![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/7d7ba43e-c758-47a7-bfed-e8f567be06bc)
+  ![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/142552ae-e788-45b4-96c6-764987ba773f)
+
+
 
 ## Appendix
 
