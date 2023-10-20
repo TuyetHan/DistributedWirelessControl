@@ -35,6 +35,10 @@ This project will be tested on Beagle Bone Black Industrial. The following steps
     For Windows: Download PUTTY and WinSCP to control and transfer source code. Read this documentation for details: https://eclipse.dev/4diac/en_help.php?helppage=html/examples/bbbTraficControl.html
 
     For Linux: Can be controlled and transfer source code directly via terminal.
+
+  Note: 192.168.7.2 is BBB's default address.
+    Debian is BBB Image which can be different for each BBB.
+    The password of BBB: temppwd.
 ```bash
   #Connect to Beagle Bone
   ssh debian@192.168.7.2
@@ -43,13 +47,20 @@ This project will be tested on Beagle Bone Black Industrial. The following steps
   scp -r /source_code/directory debian@192.168.7.2:/target/directory
 
 ```
-Note: 192.168.7.2 is BBB's default address.
-Debian is BBB Image which can be different for each BBB.
-The password of BBB: temppwd.
+
 
 
 - Set up wifi for BBB: https://www.fis.gatech.edu/how-to-configure-bbw-wifi/
 
+- Build FORTE for BBB:
+
+  The software only can build by LINUX PC. Follow this guideline: https://eclipse.dev/4diac/en_help.php?helppage=html/installation/raspi.html
+
+  However, the linaro toolchain should be download at https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/
+      version "gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf" .
+
+  Note: remember to choose correct arm-linux-gnueabi-gcc and arm-linux-gnueabi-g++ link as sometimes, linux can't return correct version inside the PC.
+  
 
 - Run FORTE on BBB:
 
