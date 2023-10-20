@@ -54,13 +54,10 @@ This project will be tested on Beagle Bone Black Industrial. The following steps
 
 - Build FORTE for BBB:
 
-  The software only can build by LINUX PC. Follow this guideline: https://eclipse.dev/4diac/en_help.php?helppage=html/installation/raspi.html
+ Follow this guideline: https://eclipse.dev/4diac/en_help.php?helppage=html/installation/raspi.html
 
-  However, the linaro toolchain should be download at https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/
-      version "gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf" .
-
-  Note: remember to choose correct arm-linux-gnueabi-gcc and arm-linux-gnueabi-g++ link as sometimes, linux can't return correct version inside the PC.
-  
+  Note: The Linaro toolchain for Linux should be downloaded at https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/
+      version "gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf" . For Windows, version raspberry-gcc8.3.0.exe will work.
 
 - Run FORTE on BBB:
 
