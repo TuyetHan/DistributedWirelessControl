@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="Merging" Comment="Template for a Basic Function Block Type">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="ADMIN" Date="2023-10-14">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="INIT" Type="Event" Comment="Initialization Request">
+				<With Var="PORT_ID1"/>
+				<With Var="SD1"/>
+				<With Var="PORT_ID2"/>
+				<With Var="SD2"/>
+				<With Var="PORT_ID3"/>
+				<With Var="SD3"/>
+				<With Var="PORT_ID4"/>
+				<With Var="SD4"/>
+				<With Var="PORT_ID5"/>
+				<With Var="SD5"/>
+			</Event>
+			<Event Name="REQ1" Type="Event" Comment="Normal Execution Request">
+				<With Var="PORT_ID1"/>
+				<With Var="SD1"/>
+			</Event>
+			<Event Name="REQ2" Type="Event" Comment="">
+				<With Var="PORT_ID2"/>
+				<With Var="SD2"/>
+			</Event>
+			<Event Name="REQ3" Type="Event" Comment="">
+				<With Var="PORT_ID3"/>
+				<With Var="SD3"/>
+			</Event>
+			<Event Name="REQ4" Type="Event" Comment="">
+				<With Var="PORT_ID4"/>
+				<With Var="SD4"/>
+			</Event>
+			<Event Name="REQ5" Type="Event" Comment="">
+				<With Var="PORT_ID5"/>
+				<With Var="SD5"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="INITO" Type="Event" Comment="Initialization Confirm">
+				<With Var="QO"/>
+				<With Var="STATUS"/>
+				<With Var="PORT_IDO"/>
+				<With Var="SDO"/>
+			</Event>
+			<Event Name="CNF" Type="Event" Comment="Execution Confirmation">
+				<With Var="PORT_IDO"/>
+				<With Var="SDO"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="PORT_ID1" Type="UINT" Comment="Port ID 1"/>
+			<VarDeclaration Name="SD1" Type="ANY" Comment=""/>
+			<VarDeclaration Name="PORT_ID2" Type="UINT" Comment="Port ID 2"/>
+			<VarDeclaration Name="SD2" Type="ANY" Comment=""/>
+			<VarDeclaration Name="PORT_ID3" Type="UINT" Comment="Port ID 3"/>
+			<VarDeclaration Name="SD3" Type="ANY" Comment=""/>
+			<VarDeclaration Name="PORT_ID4" Type="UINT" Comment="Port ID 4"/>
+			<VarDeclaration Name="SD4" Type="ANY" Comment=""/>
+			<VarDeclaration Name="PORT_ID5" Type="UINT" Comment="Port ID 5"/>
+			<VarDeclaration Name="SD5" Type="ANY" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="QO" Type="BOOL" Comment="Output event qualifier"/>
+			<VarDeclaration Name="STATUS" Type="WSTRING" Comment="Service Status"/>
+			<VarDeclaration Name="PORT_IDO" Type="UINT" Comment="Port ID Out"/>
+			<VarDeclaration Name="SDO" Type="ANY" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<BasicFB>
+		<ECC>
+			<ECState Name="START" Comment="Initial State" x="475.0" y="1125.0">
+			</ECState>
+			<ECState Name="Init" Comment="Initialization" x="600.0" y="600.0">
+				<ECAction Algorithm="initialize" Output="INITO"/>
+			</ECState>
+			<ECState Name="INPUT1" Comment="Normal execution" x="2100.0" y="400.0">
+				<ECAction Algorithm="Input1_out" Output="CNF"/>
+			</ECState>
+			<ECState Name="Initialized" Comment="" x="1900.0" y="1100.0">
+			</ECState>
+			<ECState Name="INPUT2" Comment="" x="2800.0" y="700.0">
+				<ECAction Algorithm="Input2_out" Output="CNF"/>
+			</ECState>
+			<ECState Name="INPUT3" Comment="" x="3100.0" y="1100.0">
+				<ECAction Algorithm="Input3_out" Output="CNF"/>
+			</ECState>
+			<ECState Name="INPUT4" Comment="" x="2500.0" y="1600.0">
+				<ECAction Algorithm="Input4_out" Output="CNF"/>
+			</ECState>
+			<ECState Name="INPUT5" Comment="" x="1300.0" y="1600.0">
+				<ECAction Algorithm="Input5_out" Output="CNF"/>
+			</ECState>
+			<ECTransition Source="START" Destination="Init" Condition="INIT" Comment="" x="655.0" y="955.0"/>
+			<ECTransition Source="Init" Destination="Initialized" Condition="1" Comment="" x="1660.0" y="975.0"/>
+			<ECTransition Source="Initialized" Destination="INPUT1" Condition="REQ1" Comment="" x="2085.0" y="810.0"/>
+			<ECTransition Source="INPUT1" Destination="Initialized" Condition="1" Comment="" x="2275.0" y="810.0"/>
+			<ECTransition Source="Initialized" Destination="INPUT2" Condition="REQ2" Comment="" x="2490.0" y="875.0"/>
+			<ECTransition Source="INPUT2" Destination="Initialized" Condition="1" Comment="" x="2680.0" y="1030.0"/>
+			<ECTransition Source="Initialized" Destination="INPUT3" Condition="REQ3" Comment="" x="2760.0" y="1180.0"/>
+			<ECTransition Source="INPUT3" Destination="Initialized" Condition="1" Comment="" x="2865.0" y="1340.0"/>
+			<ECTransition Source="Initialized" Destination="INPUT4" Condition="REQ4" Comment="" x="2455.0" y="1395.0"/>
+			<ECTransition Source="INPUT4" Destination="Initialized" Condition="1" Comment="" x="2260.0" y="1515.0"/>
+			<ECTransition Source="Initialized" Destination="INPUT5" Condition="REQ5" Comment="" x="1820.0" y="1495.0"/>
+			<ECTransition Source="INPUT5" Destination="Initialized" Condition="1" Comment="" x="1540.0" y="1305.0"/>
+		</ECC>
+		<Algorithm Name="initialize" Comment="Initialization algorithm">
+			<ST><![CDATA[
+]]></ST>
+		</Algorithm>
+		<Algorithm Name="deInitialize" Comment="Normally executed algorithm">
+			<ST><![CDATA[
+QO := FALSE;]]></ST>
+		</Algorithm>
+		<Algorithm Name="Input1_out" Comment="">
+			<ST><![CDATA[QO := 1;
+STATUS := "NORMAL";
+
+PORT_IDO := PORT_ID1;
+SDO := SD1;]]></ST>
+		</Algorithm>
+		<Algorithm Name="Input3_out" Comment="">
+			<ST><![CDATA[QO := 1;
+STATUS := "NORMAL";
+
+PORT_IDO := PORT_ID3;
+SDO := SD3;]]></ST>
+		</Algorithm>
+		<Algorithm Name="Input2_out" Comment="">
+			<ST><![CDATA[QO := 1;
+STATUS := "NORMAL";
+
+PORT_IDO := PORT_ID2;
+SDO := SD2;]]></ST>
+		</Algorithm>
+		<Algorithm Name="Input4_out" Comment="">
+			<ST><![CDATA[QO := 1;
+STATUS := "NORMAL";
+
+PORT_IDO := PORT_ID4;
+SDO := SD4;]]></ST>
+		</Algorithm>
+		<Algorithm Name="Input5_out" Comment="">
+			<ST><![CDATA[QO := 1;
+STATUS := "NORMAL";
+
+PORT_IDO := PORT_ID5;
+SDO := SD5;]]></ST>
+		</Algorithm>
+	</BasicFB>
+</FBType>
