@@ -24,6 +24,13 @@ Advance:
 - Improving Completion: Active Requests
 - Improving Finalization: Smart Shutdown.
 
+## General Architecture
+Below is the architecture for config communication. The FB square block represents all application Function Blocks which need to send or receive data via networks. The sending data needs to be sent to MERGE FB before being sent to MIXER. In the opposite direction, the received data needs to be sent to UNMERGE FB before being sent to application Function Blocks.
+
+![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/811f43d0-402c-4a60-8f77-1d9dd5e092a1)
+
+The graph below describes how the system over time.
+![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/f277dbc5-16c4-4cfc-b765-726aca59e442)
 
 ## Running Tests
 
