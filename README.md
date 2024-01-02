@@ -95,13 +95,6 @@ This project will be tested on Beagle Bone Black Industrial. The following steps
 ```
 
 
-## Appendix
-
-MIXER : Efficient Many-to-All Broadcast in Dynamic Wireless
-Mesh Networks - https://dl.acm.org/doi/pdf/10.1145/3274783.3274849
-
-4DIAC - https://eclipse.dev/4diac/index.php
-
 
 
 
