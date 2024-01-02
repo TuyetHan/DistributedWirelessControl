@@ -1,5 +1,5 @@
 
-# [MIXER](https://dl.acm.org/doi/pdf/10.1145/3274783.3274849) in 4DIAC
+# [MIXER](https://dl.acm.org/doi/pdf/10.1145/3274783.3274849) in [4DIAC](https://eclipse.dev/4diac/index.php)
 
 The Project Objective is to implement the basic features of MIXER - a new communication protocol - into 4DIAC - an open-source infrastructure based on the IEC 61499 standard.
 
