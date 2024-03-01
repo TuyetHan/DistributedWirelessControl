@@ -4,14 +4,8 @@
 	</VersionInfo>
 	<Application Name="TestDPApp" Comment="">
 		<SubAppNetwork>
-			<FB Name="Merging" Type="Merging" Comment="" x="2160.0" y="1090.0">
-				<Parameter Name="PORT_ID1" Value="5"/>
-				<Parameter Name="PORT_ID2" Value="10"/>
-				<Parameter Name="PORT_ID3" Value="15"/>
-				<Parameter Name="PORT_ID4" Value="20"/>
-			</FB>
 			<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="-1240.0" y="1190.0">
-				<Parameter Name="DT" Value="T#5s"/>
+				<Parameter Name="DT" Value="T#20s"/>
 			</FB>
 			<FB Name="E_DELAY" Type="E_DELAY" Comment="" x="-140.0" y="1690.0">
 				<Parameter Name="DT" Value="T#1000ms"/>
@@ -27,62 +21,109 @@
 			<FB Name="E_SR" Type="E_SR" Comment="" x="1000.0" y="2400.0">
 			</FB>
 			<FB Name="E_CYCLE_1" Type="E_CYCLE" Comment="" x="-1100.0" y="2400.0">
-				<Parameter Name="DT" Value="T#5s"/>
-			</FB>
-			<FB Name="DataProcessing" Type="DataProcessing" Comment="" x="3700.0" y="1200.0">
-				<Parameter Name="NodeID" Value="5"/>
-				<Parameter Name="TotalNode" Value="20"/>
+				<Parameter Name="DT" Value="T#10s"/>
 			</FB>
 			<FB Name="E_PERMIT" Type="E_PERMIT" Comment="" x="100.0" y="3400.0">
 			</FB>
 			<FB Name="E_CTUD" Type="E_CTUD" Comment="" x="1000.0" y="3300.0">
+				<Parameter Name="PV" Value="50"/>
+			</FB>
+			<FB Name="E_CYCLE_2" Type="E_CYCLE" Comment="" x="-1100.0" y="4400.0">
+				<Parameter Name="DT" Value="T#15s"/>
+			</FB>
+			<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="6400.0" y="2700.0">
+				<Parameter Name="QI" Value="1"/>
+				<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+			</FB>
+			<FB Name="PUBLISH_1" Type="PUBLISH_1" Comment="" x="5100.0" y="1100.0">
+				<Parameter Name="QI" Value="1"/>
+				<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+			</FB>
+			<FB Name="DataProcessing_1" Type="DataProcessing" Comment="" x="3200.0" y="1100.0">
+				<Parameter Name="NodeID" Value="3"/>
+				<Parameter Name="TotalNode" Value="20"/>
+				<Parameter Name="RD_OUT_ID" Value="&quot;5,10,15,20,43&quot;"/>
+				<Parameter Name="SD_IN_ID" Value="&quot;5,10,15,20,25&quot;"/>
+			</FB>
+			<FB Name="SUBSCRIBE_2" Type="SUBSCRIBE_1" Comment="" x="2900.0" y="4300.0">
+				<Parameter Name="QI" Value="1"/>
+				<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+			</FB>
+			<FB Name="UDINT2UDINT_2" Type="UDINT2UDINT" Comment="" x="4300.0" y="4600.0">
+			</FB>
+			<FB Name="DataProcessing" Type="DataProcessing" Comment="" x="7600.0" y="1100.0">
+				<Parameter Name="NodeID" Value="4"/>
+				<Parameter Name="TotalNode" Value="20"/>
+			</FB>
+			<FB Name="E_CYCLE_3" Type="E_CYCLE" Comment="" x="6500.0" y="1500.0">
+				<Parameter Name="DT" Value="T#5s"/>
+			</FB>
+			<FB Name="E_DELAY_1" Type="E_DELAY" Comment="" x="2300.0" y="400.0">
+				<Parameter Name="DT" Value="T#50ms"/>
+			</FB>
+			<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="5000.0" y="4000.0">
+			</FB>
+			<FB Name="BOOL2BOOL" Type="BOOL2BOOL" Comment="" x="5000.0" y="3400.0">
+			</FB>
+			<FB Name="LREAL2LREAL" Type="LREAL2LREAL" Comment="" x="5000.0" y="2000.0">
+			</FB>
+			<FB Name="LREAL2LREAL_1" Type="LREAL2LREAL" Comment="" x="5000.0" y="2700.0">
 			</FB>
 			<EventConnections>
-				<Connection Source="FB_RANDOM.CNF" Destination="Merging.REQ1" Comment=""/>
-				<Connection Source="FB_RANDOM_1.CNF" Destination="Merging.REQ2" Comment="" dx1="105.0"/>
 				<Connection Source="E_CYCLE.EO" Destination="E_DELAY.START" Comment="" dx1="105.0"/>
 				<Connection Source="E_CYCLE.EO" Destination="FB_RANDOM.REQ" Comment=""/>
 				<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
 				<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
 				<Connection Source="E_DELAY.EO" Destination="FB_RANDOM_1.REQ" Comment="" dx1="175.0"/>
 				<Connection Source="E_CYCLE_1.EO" Destination="E_SWITCH.EI" Comment=""/>
-				<Connection Source="FB_RANDOM.INITO" Destination="Merging.INIT" Comment=""/>
-				<Connection Source="Merging.CNF" Destination="DataProcessing.REQ" Comment="" dx1="345.0" dx2="345.0" dy="0.0"/>
-				<Connection Source="Merging.INITO" Destination="DataProcessing.INIT" Comment="" dx1="345.0"/>
-				<Connection Source="E_SR.EO" Destination="Merging.REQ3" Comment="" dx1="190.0"/>
 				<Connection Source="E_SR.EO" Destination="E_PERMIT.EI" Comment="" dx1="185.0" dx2="60.0" dy="610.0"/>
 				<Connection Source="E_PERMIT.EO" Destination="E_CTUD.CU" Comment="" dx1="140.0"/>
-				<Connection Source="E_PERMIT.EO" Destination="E_CTUD.CD" Comment=""/>
-				<Connection Source="E_CTUD.CO" Destination="Merging.REQ4" Comment="" dx1="180.0"/>
+				<Connection Source="DataProcessing_1.INITO" Destination="PUBLISH_1.INIT" Comment=""/>
+				<Connection Source="FB_RANDOM.INITO" Destination="DataProcessing_1.INIT" Comment="" dx1="1350.0"/>
+				<Connection Source="FB_RANDOM.CNF" Destination="DataProcessing_1.REQ1" Comment="" dx1="840.0"/>
+				<Connection Source="FB_RANDOM_1.CNF" Destination="DataProcessing_1.REQ2" Comment="" dx1="840.0"/>
+				<Connection Source="E_SR.EO" Destination="DataProcessing_1.REQ3" Comment="" dx1="820.0"/>
+				<Connection Source="E_CTUD.CO" Destination="DataProcessing_1.REQ4" Comment="" dx1="725.0"/>
+				<Connection Source="SUBSCRIBE_2.IND" Destination="UDINT2UDINT_2.REQ" Comment="" dx1="330.0"/>
+				<Connection Source="SUBSCRIBE_1.IND" Destination="DataProcessing.REQ_RD" Comment="" dx1="205.0"/>
+				<Connection Source="DataProcessing_1.ESD" Destination="PUBLISH_1.REQ" Comment=""/>
+				<Connection Source="SUBSCRIBE_1.INITO" Destination="E_CYCLE_3.START" Comment="" dx1="210.0" dx2="60.0" dy="-475.0"/>
+				<Connection Source="E_CYCLE_3.EO" Destination="DataProcessing.REQ1" Comment=""/>
+				<Connection Source="SUBSCRIBE_1.INITO" Destination="DataProcessing.INIT" Comment="" dx1="205.0"/>
+				<Connection Source="DataProcessing_1.ESD" Destination="E_DELAY_1.START" Comment="" dx1="60.0" dx2="60.0" dy="-1110.0"/>
+				<Connection Source="E_DELAY_1.EO" Destination="DataProcessing_1.TRANSMIT_TRG" Comment="" dx1="175.0"/>
+				<Connection Source="DataProcessing_1.ERD" Destination="UINT2UINT.REQ" Comment="" dx1="450.0"/>
+				<Connection Source="DataProcessing_1.ERD" Destination="BOOL2BOOL.REQ" Comment="" dx1="450.0"/>
+				<Connection Source="DataProcessing_1.ERD" Destination="LREAL2LREAL.REQ" Comment="" dx1="450.0"/>
+				<Connection Source="DataProcessing_1.ERD" Destination="LREAL2LREAL_1.REQ" Comment="" dx1="450.0"/>
 			</EventConnections>
 			<DataConnections>
-				<Connection Source="FB_RANDOM.VAL" Destination="Merging.SD1" Comment="" dx1="535.0"/>
-				<Connection Source="FB_RANDOM_1.VAL" Destination="Merging.SD2" Comment="" dx1="560.0"/>
 				<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
-				<Connection Source="Merging.PORT_IDO" Destination="DataProcessing.PortID_SD" Comment="" dx1="345.0"/>
-				<Connection Source="Merging.SDO" Destination="DataProcessing.SD_IN" Comment="" dx1="345.0"/>
-				<Connection Source="E_SR.Q" Destination="Merging.SD3" Comment="" dx1="530.0"/>
 				<Connection Source="E_SR.Q" Destination="E_PERMIT.PERMIT" Comment="" dx1="55.0" dx2="155.0" dy="125.0"/>
-				<Connection Source="E_CTUD.CV" Destination="Merging.SD4" Comment="" dx1="515.0"/>
+				<Connection Source="E_CTUD.CV" Destination="DataProcessing_1.SD_IN_4" Comment="" dx1="925.0"/>
+				<Connection Source="E_SR.Q" Destination="DataProcessing_1.SD_IN_3" Comment="" dx1="1005.0"/>
+				<Connection Source="FB_RANDOM_1.VAL" Destination="DataProcessing_1.SD_IN_2" Comment="" dx1="995.0"/>
+				<Connection Source="FB_RANDOM.VAL" Destination="DataProcessing_1.SD_IN_1" Comment="" dx1="990.0"/>
+				<Connection Source="SUBSCRIBE_2.RD_1" Destination="UDINT2UDINT_2.IN" Comment=""/>
+				<Connection Source="SUBSCRIBE_1.RD_1" Destination="DataProcessing.RD_IN" Comment=""/>
+				<Connection Source="DataProcessing_1.SD_OUT" Destination="PUBLISH_1.SD_1" Comment="" dx1="215.0"/>
+				<Connection Source="DataProcessing_1.RD_OUT_4" Destination="UINT2UINT.IN" Comment="" dx1="450.0"/>
+				<Connection Source="DataProcessing_1.RD_OUT_3" Destination="BOOL2BOOL.IN" Comment="" dx1="450.0"/>
+				<Connection Source="DataProcessing_1.RD_OUT_1" Destination="LREAL2LREAL.IN" Comment="" dx1="450.0"/>
+				<Connection Source="DataProcessing_1.RD_OUT_2" Destination="LREAL2LREAL_1.IN" Comment="" dx1="450.0"/>
 			</DataConnections>
 		</SubAppNetwork>
 	</Application>
 	<Device Name="BeagleBoneBlack" Type="BeagleBoneBlack" Comment="" x="2325.0" y="1330.0">
-		<Parameter Name="MGR_ID" Value="&quot;192.168.7.2:61499&quot;"/>
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
 		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
 		<Attribute Name="Color" Type="STRING" Value="255,190,111" Comment="color"/>
 		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
 			<FBNetwork>
-				<FB Name="Merging" Type="Merging" Comment="" x="2000.0" y="1400.0">
-					<Parameter Name="PORT_ID1" Value="5"/>
-					<Parameter Name="PORT_ID2" Value="10"/>
-					<Parameter Name="PORT_ID3" Value="15"/>
-					<Parameter Name="PORT_ID4" Value="20"/>
-				</FB>
 				<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="-1600.0" y="1500.0">
-					<Parameter Name="DT" Value="T#5s"/>
+					<Parameter Name="DT" Value="T#20s"/>
 				</FB>
-				<FB Name="E_DELAY" Type="E_DELAY" Comment="" x="-500.0" y="2000.0">
+				<FB Name="E_DELAY" Type="E_DELAY" Comment="" x="-500.0" y="2100.0">
 					<Parameter Name="DT" Value="T#1000ms"/>
 				</FB>
 				<FB Name="FB_RANDOM" Type="FB_RANDOM" Comment="" x="600.0" y="1400.0">
@@ -96,56 +137,125 @@
 				<FB Name="E_SR" Type="E_SR" Comment="" x="700.0" y="3200.0">
 				</FB>
 				<FB Name="E_CYCLE_1" Type="E_CYCLE" Comment="" x="-1600.0" y="3200.0">
-					<Parameter Name="DT" Value="T#5s"/>
+					<Parameter Name="DT" Value="T#10s"/>
 				</FB>
-				<FB Name="DataProcessing" Type="DataProcessing" Comment="" x="3440.0" y="1810.0">
-					<Parameter Name="NodeID" Value="5"/>
-					<Parameter Name="TotalNode" Value="20"/>
-				</FB>
-				<FB Name="E_PERMIT" Type="E_PERMIT" Comment="" x="1100.0" y="3300.0">
+				<FB Name="E_PERMIT" Type="E_PERMIT" Comment="" x="400.0" y="4000.0">
 				</FB>
 				<FB Name="E_CTUD" Type="E_CTUD" Comment="" x="2200.0" y="3200.0">
+					<Parameter Name="PV" Value="50"/>
+				</FB>
+				<FB Name="E_CYCLE_2" Type="E_CYCLE" Comment="" x="-1200.0" y="4300.0">
+					<Parameter Name="DT" Value="T#15s"/>
+				</FB>
+				<FB Name="PUBLISH_1" Type="PUBLISH_1" Comment="" x="6300.0" y="1200.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="DataProcessing_1" Type="DataProcessing" Comment="" x="5300.0" y="2700.0">
+					<Parameter Name="NodeID" Value="3"/>
+					<Parameter Name="TotalNode" Value="20"/>
+					<Parameter Name="RD_OUT_ID" Value="&quot;5,10,15,20,43&quot;"/>
+					<Parameter Name="SD_IN_ID" Value="&quot;5,10,15,20,25&quot;"/>
+				</FB>
+				<FB Name="SUBSCRIBE_2" Type="SUBSCRIBE_1" Comment="" x="600.0" y="5100.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="UDINT2UDINT_2" Type="UDINT2UDINT" Comment="" x="2000.0" y="5400.0">
+				</FB>
+				<FB Name="E_DELAY_1" Type="E_DELAY" Comment="" x="2300.0" y="400.0">
+					<Parameter Name="DT" Value="T#50ms"/>
+				</FB>
+				<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="4800.0" y="3000.0">
+				</FB>
+				<FB Name="BOOL2BOOL" Type="BOOL2BOOL" Comment="" x="5090.0" y="2920.0">
+				</FB>
+				<FB Name="LREAL2LREAL" Type="LREAL2LREAL" Comment="" x="4900.0" y="2000.0">
+				</FB>
+				<FB Name="LREAL2LREAL_1" Type="LREAL2LREAL" Comment="" x="4900.0" y="2700.0">
 				</FB>
 				<EventConnections>
 					<Connection Source="E_CYCLE.EO" Destination="E_DELAY.START" Comment="" dx1="275.0"/>
 					<Connection Source="E_CYCLE.EO" Destination="FB_RANDOM.REQ" Comment=""/>
-					<Connection Source="FB_RANDOM.CNF" Destination="Merging.REQ1" Comment=""/>
-					<Connection Source="E_DELAY.EO" Destination="FB_RANDOM_1.REQ" Comment="" dx1="175.0"/>
-					<Connection Source="FB_RANDOM_1.CNF" Destination="Merging.REQ2" Comment="" dx1="380.0"/>
+					<Connection Source="E_DELAY.EO" Destination="FB_RANDOM_1.REQ" Comment=""/>
 					<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
 					<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
 					<Connection Source="E_CYCLE_1.EO" Destination="E_SWITCH.EI" Comment=""/>
 					<Connection Source="START.COLD" Destination="E_CYCLE.START" Comment="" dx1="120.0"/>
-					<Connection Source="START.COLD" Destination="FB_RANDOM.INIT" Comment="" dx1="2815.0"/>
+					<Connection Source="START.COLD" Destination="FB_RANDOM.INIT" Comment="" dx1="2490.0"/>
 					<Connection Source="START.WARM" Destination="E_CYCLE.START" Comment="" dx1="115.0"/>
-					<Connection Source="START.WARM" Destination="FB_RANDOM.INIT" Comment="" dx1="2825.0"/>
-					<Connection Source="START.COLD" Destination="FB_RANDOM_1.INIT" Comment="" dx1="2815.0"/>
-					<Connection Source="START.WARM" Destination="FB_RANDOM_1.INIT" Comment="" dx1="2820.0"/>
-					<Connection Source="FB_RANDOM.INITO" Destination="Merging.INIT" Comment=""/>
+					<Connection Source="START.WARM" Destination="FB_RANDOM.INIT" Comment="" dx1="2490.0"/>
+					<Connection Source="START.COLD" Destination="FB_RANDOM_1.INIT" Comment="" dx1="2490.0"/>
+					<Connection Source="START.WARM" Destination="FB_RANDOM_1.INIT" Comment="" dx1="2490.0"/>
 					<Connection Source="START.COLD" Destination="E_CYCLE_1.START" Comment="" dx1="115.0"/>
-					<Connection Source="START.WARM" Destination="E_CYCLE_1.START" Comment="" dx1="120.0"/>
-					<Connection Source="Merging.CNF" Destination="DataProcessing.REQ" Comment="" dx1="300.0"/>
-					<Connection Source="Merging.INITO" Destination="DataProcessing.INIT" Comment="" dx1="300.0"/>
-					<Connection Source="E_SR.EO" Destination="Merging.REQ3" Comment="" dx1="440.0"/>
-					<Connection Source="E_SR.EO" Destination="E_PERMIT.EI" Comment="" dx1="60.0" dx2="60.0" dy="50.0"/>
-					<Connection Source="E_PERMIT.EO" Destination="E_CTUD.CU" Comment="" dx1="250.0"/>
-					<Connection Source="E_PERMIT.EO" Destination="E_CTUD.CD" Comment=""/>
-					<Connection Source="E_CTUD.CO" Destination="Merging.REQ4" Comment="" dx1="60.0" dx2="60.0" dy="-700.0"/>
+					<Connection Source="START.WARM" Destination="E_CYCLE_1.START" Comment="" dx1="110.0"/>
+					<Connection Source="E_SR.EO" Destination="E_PERMIT.EI" Comment="" dx1="435.0" dx2="150.0" dy="590.0"/>
+					<Connection Source="E_PERMIT.EO" Destination="E_CTUD.CU" Comment="" dx1="800.0"/>
+					<Connection Source="START.COLD" Destination="E_CYCLE_2.START" Comment="" dx1="110.0"/>
+					<Connection Source="START.WARM" Destination="E_CYCLE_2.START" Comment="" dx1="110.0"/>
+					<Connection Source="DataProcessing_1.INITO" Destination="PUBLISH_1.INIT" Comment=""/>
+					<Connection Source="FB_RANDOM.INITO" Destination="DataProcessing_1.INIT" Comment=""/>
+					<Connection Source="FB_RANDOM.CNF" Destination="DataProcessing_1.REQ1" Comment=""/>
+					<Connection Source="FB_RANDOM_1.CNF" Destination="DataProcessing_1.REQ2" Comment=""/>
+					<Connection Source="E_SR.EO" Destination="DataProcessing_1.REQ3" Comment=""/>
+					<Connection Source="E_CTUD.CO" Destination="DataProcessing_1.REQ4" Comment=""/>
+					<Connection Source="SUBSCRIBE_2.IND" Destination="UDINT2UDINT_2.REQ" Comment=""/>
+					<Connection Source="DataProcessing_1.ESD" Destination="PUBLISH_1.REQ" Comment=""/>
+					<Connection Source="DataProcessing_1.ESD" Destination="E_DELAY_1.START" Comment=""/>
+					<Connection Source="E_DELAY_1.EO" Destination="DataProcessing_1.TRANSMIT_TRG" Comment=""/>
+					<Connection Source="DataProcessing_1.ERD" Destination="UINT2UINT.REQ" Comment=""/>
+					<Connection Source="DataProcessing_1.ERD" Destination="BOOL2BOOL.REQ" Comment=""/>
+					<Connection Source="DataProcessing_1.ERD" Destination="LREAL2LREAL.REQ" Comment=""/>
+					<Connection Source="DataProcessing_1.ERD" Destination="LREAL2LREAL_1.REQ" Comment=""/>
 				</EventConnections>
 				<DataConnections>
-					<Connection Source="FB_RANDOM.VAL" Destination="Merging.SD1" Comment="" dx1="380.0"/>
-					<Connection Source="FB_RANDOM_1.VAL" Destination="Merging.SD2" Comment="" dx1="380.0"/>
 					<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
-					<Connection Source="Merging.PORT_IDO" Destination="DataProcessing.PortID_SD" Comment="" dx1="300.0"/>
-					<Connection Source="Merging.SDO" Destination="DataProcessing.SD_IN" Comment="" dx1="300.0"/>
-					<Connection Source="E_SR.Q" Destination="Merging.SD3" Comment="" dx1="440.0"/>
-					<Connection Source="E_SR.Q" Destination="E_PERMIT.PERMIT" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
-					<Connection Source="E_CTUD.CV" Destination="Merging.SD4" Comment="" dx1="60.0" dx2="60.0" dy="-550.0"/>
+					<Connection Source="E_SR.Q" Destination="E_PERMIT.PERMIT" Comment="" dx1="60.0" dx2="960.0" dy="120.0"/>
+					<Connection Source="E_CTUD.CV" Destination="DataProcessing_1.SD_IN_4" Comment=""/>
+					<Connection Source="E_SR.Q" Destination="DataProcessing_1.SD_IN_3" Comment=""/>
+					<Connection Source="FB_RANDOM_1.VAL" Destination="DataProcessing_1.SD_IN_2" Comment=""/>
+					<Connection Source="FB_RANDOM.VAL" Destination="DataProcessing_1.SD_IN_1" Comment=""/>
+					<Connection Source="SUBSCRIBE_2.RD_1" Destination="UDINT2UDINT_2.IN" Comment=""/>
+					<Connection Source="DataProcessing_1.SD_OUT" Destination="PUBLISH_1.SD_1" Comment=""/>
+					<Connection Source="DataProcessing_1.RD_OUT_4" Destination="UINT2UINT.IN" Comment=""/>
+					<Connection Source="DataProcessing_1.RD_OUT_3" Destination="BOOL2BOOL.IN" Comment=""/>
+					<Connection Source="DataProcessing_1.RD_OUT_1" Destination="LREAL2LREAL.IN" Comment=""/>
+					<Connection Source="DataProcessing_1.RD_OUT_2" Destination="LREAL2LREAL_1.IN" Comment=""/>
 				</DataConnections>
 			</FBNetwork>
 		</Resource>
 	</Device>
-	<Mapping From="TestDPApp.Merging" To="BeagleBoneBlack.EMB_RES.Merging"/>
+	<Device Name="BeagleBoneBlack_1" Type="BeagleBoneBlack" Comment="" x="4100.0" y="1300.0">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61500&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="35,192,58" Comment="color"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="6500.0" y="2900.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="DataProcessing" Type="DataProcessing" Comment="" x="8000.0" y="1100.0">
+					<Parameter Name="NodeID" Value="4"/>
+					<Parameter Name="TotalNode" Value="20"/>
+				</FB>
+				<FB Name="E_CYCLE_3" Type="E_CYCLE" Comment="" x="6400.0" y="1300.0">
+					<Parameter Name="DT" Value="T#5s"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="START.COLD" Destination="SUBSCRIBE_1.INIT" Comment="" dx1="575.0"/>
+					<Connection Source="START.WARM" Destination="SUBSCRIBE_1.INIT" Comment="" dx1="575.0"/>
+					<Connection Source="SUBSCRIBE_1.IND" Destination="DataProcessing.REQ_RD" Comment=""/>
+					<Connection Source="SUBSCRIBE_1.INITO" Destination="E_CYCLE_3.START" Comment=""/>
+					<Connection Source="E_CYCLE_3.EO" Destination="DataProcessing.REQ1" Comment=""/>
+					<Connection Source="SUBSCRIBE_1.INITO" Destination="DataProcessing.INIT" Comment=""/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="SUBSCRIBE_1.RD_1" Destination="DataProcessing.RD_IN" Comment=""/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
 	<Mapping From="TestDPApp.E_CYCLE" To="BeagleBoneBlack.EMB_RES.E_CYCLE"/>
 	<Mapping From="TestDPApp.E_DELAY" To="BeagleBoneBlack.EMB_RES.E_DELAY"/>
 	<Mapping From="TestDPApp.FB_RANDOM" To="BeagleBoneBlack.EMB_RES.FB_RANDOM"/>
@@ -153,12 +263,26 @@
 	<Mapping From="TestDPApp.E_SWITCH" To="BeagleBoneBlack.EMB_RES.E_SWITCH"/>
 	<Mapping From="TestDPApp.E_SR" To="BeagleBoneBlack.EMB_RES.E_SR"/>
 	<Mapping From="TestDPApp.E_CYCLE_1" To="BeagleBoneBlack.EMB_RES.E_CYCLE_1"/>
-	<Mapping From="TestDPApp.DataProcessing" To="BeagleBoneBlack.EMB_RES.DataProcessing"/>
 	<Mapping From="TestDPApp.E_PERMIT" To="BeagleBoneBlack.EMB_RES.E_PERMIT"/>
 	<Mapping From="TestDPApp.E_CTUD" To="BeagleBoneBlack.EMB_RES.E_CTUD"/>
+	<Mapping From="TestDPApp.E_CYCLE_2" To="BeagleBoneBlack.EMB_RES.E_CYCLE_2"/>
+	<Mapping From="TestDPApp.PUBLISH_1" To="BeagleBoneBlack.EMB_RES.PUBLISH_1"/>
+	<Mapping From="TestDPApp.DataProcessing_1" To="BeagleBoneBlack.EMB_RES.DataProcessing_1"/>
+	<Mapping From="TestDPApp.SUBSCRIBE_1" To="BeagleBoneBlack_1.EMB_RES.SUBSCRIBE_1"/>
+	<Mapping From="TestDPApp.SUBSCRIBE_2" To="BeagleBoneBlack.EMB_RES.SUBSCRIBE_2"/>
+	<Mapping From="TestDPApp.UDINT2UDINT_2" To="BeagleBoneBlack.EMB_RES.UDINT2UDINT_2"/>
+	<Mapping From="TestDPApp.DataProcessing" To="BeagleBoneBlack_1.EMB_RES.DataProcessing"/>
+	<Mapping From="TestDPApp.E_CYCLE_3" To="BeagleBoneBlack_1.EMB_RES.E_CYCLE_3"/>
+	<Mapping From="TestDPApp.E_DELAY_1" To="BeagleBoneBlack.EMB_RES.E_DELAY_1"/>
+	<Mapping From="TestDPApp.UINT2UINT" To="BeagleBoneBlack.EMB_RES.UINT2UINT"/>
+	<Mapping From="TestDPApp.BOOL2BOOL" To="BeagleBoneBlack.EMB_RES.BOOL2BOOL"/>
+	<Mapping From="TestDPApp.LREAL2LREAL" To="BeagleBoneBlack.EMB_RES.LREAL2LREAL"/>
+	<Mapping From="TestDPApp.LREAL2LREAL_1" To="BeagleBoneBlack.EMB_RES.LREAL2LREAL_1"/>
 	<Segment Name="Ethernet" Type="Ethernet" Comment="" x="2635.0" y="810.0" dx1="1500.0">
 		<Attribute Name="Color" Type="STRING" Value="76,221,155" Comment="color"/>
 	</Segment>
 	<Link SegmentName="Ethernet" CommResource="BeagleBoneBlack" Comment="">
+	</Link>
+	<Link SegmentName="Ethernet" CommResource="BeagleBoneBlack_1" Comment="">
 	</Link>
 </System>
