@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="TestSP" Comment="">
+	<VersionInfo Version="1.0" Author="ADMIN" Date="2024-01-14">
+	</VersionInfo>
+	<Application Name="TestSPApp" Comment="">
+		<SubAppNetwork>
+			<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="400.0" y="2300.0">
+				<Parameter Name="DT" Value="T#7s"/>
+			</FB>
+			<FB Name="FB_RANDOM" Type="FB_RANDOM" Comment="" x="1400.0" y="2300.0">
+				<Parameter Name="SEED" Value="20"/>
+			</FB>
+			<FB Name="E_CYCLE_1" Type="E_CYCLE" Comment="" x="400.0" y="3000.0">
+				<Parameter Name="DT" Value="T#3s"/>
+			</FB>
+			<FB Name="E_SWITCH" Type="E_SWITCH" Comment="" x="1500.0" y="3000.0">
+			</FB>
+			<FB Name="E_SR" Type="E_SR" Comment="" x="2500.0" y="3000.0">
+			</FB>
+			<FB Name="E_PERMIT" Type="E_PERMIT" Comment="" x="400.0" y="4000.0">
+			</FB>
+			<FB Name="E_PERMIT_1" Type="E_PERMIT" Comment="" x="4000.0" y="6600.0">
+			</FB>
+			<FB Name="E_CTU" Type="E_CTU" Comment="" x="5000.0" y="6600.0">
+			</FB>
+			<FB Name="E_CYCLE_2" Type="E_CYCLE" Comment="" x="600.0" y="5800.0">
+				<Parameter Name="DT" Value="T#10s"/>
+			</FB>
+			<FB Name="FB_RANDOM_1" Type="FB_RANDOM" Comment="" x="1600.0" y="5800.0">
+				<Parameter Name="SEED" Value="20"/>
+			</FB>
+			<FB Name="E_CYCLE_3" Type="E_CYCLE" Comment="" x="600.0" y="6500.0">
+				<Parameter Name="DT" Value="T#5s"/>
+			</FB>
+			<FB Name="E_SWITCH_1" Type="E_SWITCH" Comment="" x="1700.0" y="6500.0">
+			</FB>
+			<FB Name="E_SR_1" Type="E_SR" Comment="" x="2700.0" y="6500.0">
+			</FB>
+			<FB Name="E_PERMIT_2" Type="E_PERMIT" Comment="" x="600.0" y="7400.0">
+			</FB>
+			<FB Name="REAL2REAL_1" Type="REAL2REAL" Comment="" x="4000.0" y="2400.0">
+			</FB>
+			<FB Name="E_PERMIT_3" Type="E_PERMIT" Comment="" x="4000.0" y="3100.0">
+			</FB>
+			<FB Name="E_CTU_1" Type="E_CTU" Comment="" x="4900.0" y="3100.0">
+			</FB>
+			<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="4000.0" y="4600.0">
+			</FB>
+			<FB Name="INT2INT" Type="INT2INT" Comment="" x="4000.0" y="7400.0">
+			</FB>
+			<FB Name="SINT2SINT_1" Type="SINT2SINT" Comment="" x="2500.0" y="8300.0">
+			</FB>
+			<FB Name="USINT2USINT" Type="USINT2USINT" Comment="" x="4000.0" y="4000.0">
+			</FB>
+			<FB Name="E_CTU_2" Type="E_CTU" Comment="" x="1300.0" y="4000.0">
+			</FB>
+			<FB Name="UINT2UINT_1" Type="UINT2UINT" Comment="" x="2400.0" y="4600.0">
+			</FB>
+			<FB Name="SINT2SINT_2" Type="SINT2SINT" Comment="" x="4000.0" y="8300.0">
+			</FB>
+			<FB Name="INT2INT_1" Type="INT2INT" Comment="" x="2700.0" y="7400.0">
+			</FB>
+			<FB Name="USINT2USINT_1" Type="USINT2USINT" Comment="" x="2300.0" y="4000.0">
+				<Parameter Name="IN" Value="200"/>
+			</FB>
+			<FB Name="LREAL2LREAL" Type="LREAL2LREAL" Comment="" x="2600.0" y="5900.0">
+			</FB>
+			<FB Name="LREAL2LREAL_1" Type="LREAL2LREAL" Comment="" x="4300.0" y="5500.0">
+			</FB>
+			<FB Name="FB_CTD" Type="FB_CTD" Comment="" x="1700.0" y="7400.0">
+				<Parameter Name="PV" Value="5"/>
+			</FB>
+			<FB Name="F_INT_TO_SINT" Type="F_INT_TO_SINT" Comment="" x="1200.0" y="8300.0">
+			</FB>
+			<EventConnections>
+				<Connection Source="E_CYCLE.EO" Destination="FB_RANDOM.REQ" Comment="" dx1="225.0"/>
+				<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
+				<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
+				<Connection Source="E_SR.EO" Destination="E_PERMIT.EI" Comment="" dx1="185.0" dx2="185.0" dy="610.0"/>
+				<Connection Source="E_CYCLE_1.EO" Destination="E_SWITCH.EI" Comment=""/>
+				<Connection Source="E_PERMIT_1.EO" Destination="E_CTU.CU" Comment=""/>
+				<Connection Source="E_PERMIT_3.EO" Destination="E_CTU_1.CU" Comment=""/>
+				<Connection Source="E_SR_1.EO" Destination="E_PERMIT_2.EI" Comment="" dx1="185.0" dx2="185.0" dy="610.0"/>
+				<Connection Source="E_CYCLE_2.EO" Destination="FB_RANDOM_1.REQ" Comment="" dx1="220.0"/>
+				<Connection Source="E_SWITCH_1.EO1" Destination="E_SR_1.R" Comment=""/>
+				<Connection Source="E_CYCLE_3.EO" Destination="E_SWITCH_1.EI" Comment=""/>
+				<Connection Source="E_SWITCH_1.EO0" Destination="E_SR_1.S" Comment=""/>
+				<Connection Source="E_PERMIT.EO" Destination="E_CTU_2.CU" Comment=""/>
+				<Connection Source="E_CTU_2.CUO" Destination="UINT2UINT_1.REQ" Comment="" dx1="315.0"/>
+				<Connection Source="E_CTU_2.CUO" Destination="USINT2USINT_1.REQ" Comment=""/>
+				<Connection Source="FB_RANDOM_1.CNF" Destination="LREAL2LREAL.REQ" Comment=""/>
+				<Connection Source="E_PERMIT_2.EO" Destination="FB_CTD.REQ" Comment=""/>
+				<Connection Source="FB_CTD.CNF" Destination="INT2INT_1.REQ" Comment=""/>
+				<Connection Source="F_INT_TO_SINT.CNF" Destination="SINT2SINT_1.REQ" Comment=""/>
+				<Connection Source="FB_CTD.CNF" Destination="F_INT_TO_SINT.REQ" Comment="" dx1="60.0" dx2="60.0" dy="710.0"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+				<Connection Source="E_SR.Q" Destination="E_PERMIT.PERMIT" Comment="" dx1="190.0" dx2="180.0" dy="250.0"/>
+				<Connection Source="E_SR_1.Q" Destination="E_SWITCH_1.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+				<Connection Source="E_SR_1.Q" Destination="E_PERMIT_2.PERMIT" Comment="" dx1="190.0" dx2="190.0" dy="245.0"/>
+				<Connection Source="E_SR.Q" Destination="E_PERMIT_3.PERMIT" Comment=""/>
+				<Connection Source="E_SR_1.Q" Destination="E_PERMIT_1.PERMIT" Comment=""/>
+				<Connection Source="FB_RANDOM.VAL" Destination="REAL2REAL_1.IN" Comment=""/>
+				<Connection Source="E_CTU_2.CV" Destination="UINT2UINT_1.IN" Comment="" dx1="315.0"/>
+				<Connection Source="INT2INT_1.OUT" Destination="INT2INT.IN" Comment=""/>
+				<Connection Source="SINT2SINT_1.OUT" Destination="SINT2SINT_2.IN" Comment=""/>
+				<Connection Source="USINT2USINT_1.OUT" Destination="USINT2USINT.IN" Comment=""/>
+				<Connection Source="UINT2UINT_1.OUT" Destination="UINT2UINT.IN" Comment=""/>
+				<Connection Source="FB_RANDOM_1.VAL" Destination="LREAL2LREAL.IN" Comment=""/>
+				<Connection Source="LREAL2LREAL.OUT" Destination="LREAL2LREAL_1.IN" Comment="" dx1="380.0"/>
+				<Connection Source="FB_CTD.CV" Destination="INT2INT_1.IN" Comment="" dx1="225.0"/>
+				<Connection Source="F_INT_TO_SINT.OUT" Destination="SINT2SINT_1.IN" Comment=""/>
+				<Connection Source="FB_CTD.CV" Destination="F_INT_TO_SINT.IN" Comment="" dx1="60.0" dx2="60.0" dy="360.0"/>
+				<Connection Source="E_SR_1.Q" Destination="FB_CTD.CD" Comment="" dx1="60.0" dx2="60.0" dy="245.0"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="BeagleBoneBlack" Type="BeagleBoneBlack" Comment="" x="300.0" y="1000.0">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61500&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111" Comment="color"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="Mixer" Type="Mixer_Main" Comment="" x="6600.0" y="820.0">
+					<Parameter Name="NodeID" Value="1"/>
+					<Parameter Name="TotalNode" Value="4"/>
+					<Parameter Name="RD_OUT_ID" Value="&quot;6,7,8,9,10&quot;"/>
+					<Parameter Name="SD_IN_ID" Value="&quot;1,2,3,4,5&quot;"/>
+				</FB>
+				<FB Name="Rx_TRG_CYC" Type="E_CYCLE" Comment="" x="1100.0" y="-920.0">
+					<Parameter Name="DT" Value="T#400ms"/>
+				</FB>
+				<FB Name="PUBLISH_1" Type="PUBLISH_1" Comment="" x="8800.0" y="800.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="E_DELAY_1" Type="E_DELAY" Comment="" x="300.0" y="-1100.0">
+					<Parameter Name="DT" Value="T#5ms"/>
+				</FB>
+				<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="4500.0" y="1400.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="E_MERGE" Type="E_MERGE" Comment="" x="1800.0" y="-1200.0">
+				</FB>
+				<FB Name="Tx_DELAY" Type="E_DELAY" Comment="" x="1100.0" y="-1600.0">
+					<Parameter Name="DT" Value="T#300ms"/>
+				</FB>
+				<FB Name="ROUND_CYC" Type="E_CYCLE" Comment="" x="300.0" y="-1800.0">
+					<Parameter Name="DT" Value="T#1s"/>
+				</FB>
+				<FB Name="USINT2USINT_1" Type="USINT2USINT" Comment="" x="5000.0" y="5100.0">
+					<Parameter Name="IN" Value="200"/>
+				</FB>
+				<FB Name="UINT2UINT_1" Type="UINT2UINT" Comment="" x="5000.0" y="5800.0">
+				</FB>
+				<FB Name="E_CTU_2" Type="E_CTU" Comment="" x="3900.0" y="4900.0">
+				</FB>
+				<FB Name="E_CTU" Type="E_CTU" Comment="" x="9300.0" y="3300.0">
+				</FB>
+				<FB Name="E_PERMIT_1" Type="E_PERMIT" Comment="" x="8400.0" y="3300.0">
+				</FB>
+				<FB Name="E_PERMIT" Type="E_PERMIT" Comment="" x="3000.0" y="4900.0">
+				</FB>
+				<FB Name="E_SR" Type="E_SR" Comment="" x="5200.0" y="3800.0">
+				</FB>
+				<FB Name="E_SWITCH" Type="E_SWITCH" Comment="" x="4200.0" y="3800.0">
+				</FB>
+				<FB Name="E_CYCLE_1" Type="E_CYCLE" Comment="" x="3100.0" y="3800.0">
+					<Parameter Name="DT" Value="T#3s"/>
+				</FB>
+				<FB Name="FB_RANDOM" Type="FB_RANDOM" Comment="" x="4100.0" y="3100.0">
+					<Parameter Name="SEED" Value="20"/>
+				</FB>
+				<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="3100.0" y="3100.0">
+					<Parameter Name="DT" Value="T#7s"/>
+				</FB>
+				<FB Name="LREAL2LREAL_1" Type="LREAL2LREAL" Comment="" x="8400.0" y="2600.0">
+				</FB>
+				<FB Name="INT2INT" Type="INT2INT" Comment="" x="8400.0" y="4000.0">
+				</FB>
+				<FB Name="SINT2SINT_2" Type="SINT2SINT" Comment="" x="8400.0" y="4900.0">
+				</FB>
+				<FB Name="MIXER_SP" Type="Mixer_Timer" Comment="" x="4500.0" y="200.0">
+					<Parameter Name="ROUND_CYC" Value="T#1s"/>
+					<Parameter Name="TX_DELAY_TRG" Value="T#300ms"/>
+					<Parameter Name="RD_TRG_CYC" Value="T#400ms"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="ROUND_CYC.EO" Destination="Tx_DELAY.START" Comment="" dx1="125.0"/>
+					<Connection Source="E_DELAY_1.EO" Destination="E_MERGE.EI2" Comment=""/>
+					<Connection Source="Tx_DELAY.EO" Destination="E_MERGE.EI1" Comment="" dx1="75.0"/>
+					<Connection Source="USINT2USINT_1.CNF" Destination="Mixer.REQ3" Comment="" dx1="645.0"/>
+					<Connection Source="UINT2UINT_1.CNF" Destination="Mixer.REQ4" Comment="" dx1="730.0"/>
+					<Connection Source="E_CTU_2.CUO" Destination="UINT2UINT_1.REQ" Comment="" dx1="275.0"/>
+					<Connection Source="E_CTU_2.CUO" Destination="USINT2USINT_1.REQ" Comment="" dx1="575.0"/>
+					<Connection Source="E_PERMIT_1.EO" Destination="E_CTU.CU" Comment=""/>
+					<Connection Source="Mixer.ERD" Destination="E_PERMIT_1.EI" Comment="" dx1="450.0"/>
+					<Connection Source="E_PERMIT.EO" Destination="E_CTU_2.CU" Comment=""/>
+					<Connection Source="E_SR.EO" Destination="E_PERMIT.EI" Comment="" dx1="60.0" dx2="60.0" dy="800.0"/>
+					<Connection Source="E_SR.EO" Destination="Mixer.REQ2" Comment="" dx1="755.0"/>
+					<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
+					<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
+					<Connection Source="E_CYCLE_1.EO" Destination="E_SWITCH.EI" Comment=""/>
+					<Connection Source="START.COLD" Destination="E_CYCLE_1.START" Comment="" dx1="280.0"/>
+					<Connection Source="START.WARM" Destination="E_CYCLE_1.START" Comment="" dx1="280.0"/>
+					<Connection Source="FB_RANDOM.CNF" Destination="Mixer.REQ1" Comment="" dx1="1635.0"/>
+					<Connection Source="E_CYCLE.EO" Destination="FB_RANDOM.REQ" Comment="" dx1="225.0"/>
+					<Connection Source="START.COLD" Destination="E_CYCLE.START" Comment="" dx1="280.0"/>
+					<Connection Source="START.WARM" Destination="E_CYCLE.START" Comment="" dx1="280.0"/>
+					<Connection Source="Mixer.ERD" Destination="LREAL2LREAL_1.REQ" Comment="" dx1="450.0"/>
+					<Connection Source="Mixer.ERD" Destination="INT2INT.REQ" Comment="" dx1="450.0"/>
+					<Connection Source="Mixer.ERD" Destination="SINT2SINT_2.REQ" Comment="" dx1="450.0"/>
+					<Connection Source="START.COLD" Destination="MIXER_SP.INIT" Comment="" dx1="1775.0" dx2="1775.0" dy="0.0"/>
+					<Connection Source="Mixer.ESD" Destination="MIXER_SP.ESD" Comment="" dx1="60.0" dx2="60.0" dy="-1065.0"/>
+					<Connection Source="MIXER_SP.ROUND_START" Destination="Mixer.ROUND_START" Comment="" dx1="490.0" dx2="490.0" dy="0.0"/>
+					<Connection Source="MIXER_SP.TRANSMIT_TRG" Destination="Mixer.TRANSMIT_TRG" Comment="" dx1="490.0" dx2="490.0" dy="0.0"/>
+					<Connection Source="MIXER_SP.SEND_RD" Destination="Mixer.SEND_RD" Comment="" dx1="490.0" dx2="490.0" dy="0.0"/>
+					<Connection Source="SUBSCRIBE_1.IND" Destination="Mixer.REQ_RD" Comment="" dx1="730.0"/>
+					<Connection Source="Mixer.INITO" Destination="PUBLISH_1.INIT" Comment="" dx1="650.0"/>
+					<Connection Source="Mixer.ESD" Destination="PUBLISH_1.REQ" Comment="" dx1="650.0"/>
+					<Connection Source="SUBSCRIBE_1.INITO" Destination="Mixer.INIT" Comment="" dx1="680.0"/>
+					<Connection Source="START.COLD" Destination="SUBSCRIBE_1.INIT" Comment="" dx1="1425.0"/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="USINT2USINT_1.OUT" Destination="Mixer.SD_IN_3" Comment="" dx1="640.0"/>
+					<Connection Source="UINT2UINT_1.OUT" Destination="Mixer.SD_IN_4" Comment="" dx1="725.0"/>
+					<Connection Source="E_CTU_2.CV" Destination="UINT2UINT_1.IN" Comment="" dx1="215.0"/>
+					<Connection Source="E_SR.Q" Destination="E_PERMIT.PERMIT" Comment="" dx1="60.0" dx2="60.0" dy="450.0"/>
+					<Connection Source="E_SR.Q" Destination="Mixer.SD_IN_2" Comment="" dx1="755.0"/>
+					<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+					<Connection Source="FB_RANDOM.VAL" Destination="Mixer.SD_IN_1" Comment="" dx1="1635.0"/>
+					<Connection Source="Mixer.RD_OUT_2" Destination="E_PERMIT_1.PERMIT" Comment="" dx1="435.0" dx2="435.0" dy="0.0"/>
+					<Connection Source="Mixer.RD_OUT_1" Destination="LREAL2LREAL_1.IN" Comment="" dx1="450.0"/>
+					<Connection Source="Mixer.RD_OUT_3" Destination="INT2INT.IN" Comment="" dx1="450.0"/>
+					<Connection Source="Mixer.RD_OUT_4" Destination="SINT2SINT_2.IN" Comment="" dx1="450.0"/>
+					<Connection Source="SUBSCRIBE_1.RD_1" Destination="Mixer.RD_IN" Comment="" dx1="730.0"/>
+					<Connection Source="Mixer.SD_OUT" Destination="PUBLISH_1.SD_1" Comment="" dx1="650.0"/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Device Name="BeagleBoneBlack_1" Type="BeagleBoneBlack" Comment="" x="1900.0" y="1000.0">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61501&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="0,255,128" Comment="color"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="E_MERGE_1" Type="E_MERGE" Comment="" x="-500.0" y="-1300.0">
+				</FB>
+				<FB Name="Tx_DELAY_1" Type="E_DELAY" Comment="" x="-1200.0" y="-1700.0">
+					<Parameter Name="DT" Value="T#300ms"/>
+				</FB>
+				<FB Name="TX_TRG" Type="E_DELAY" Comment="" x="-2000.0" y="-1200.0">
+					<Parameter Name="DT" Value="T#5ms"/>
+				</FB>
+				<FB Name="PUBLISH_2" Type="PUBLISH_1" Comment="" x="7500.0" y="300.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="SUBSCRIBE_2" Type="SUBSCRIBE_1" Comment="" x="3300.0" y="600.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="Mixer" Type="Mixer_Main" Comment="" x="5300.0" y="300.0">
+					<Parameter Name="NodeID" Value="2"/>
+					<Parameter Name="TotalNode" Value="4"/>
+					<Parameter Name="RD_OUT_ID" Value="&quot;1,2,3,4,5&quot;"/>
+					<Parameter Name="SD_IN_ID" Value="&quot;6,7,8,9,10&quot;"/>
+				</FB>
+				<FB Name="Rx_TRG_CYC_1" Type="E_CYCLE" Comment="" x="-1200.0" y="-1000.0">
+					<Parameter Name="DT" Value="T#400ms"/>
+				</FB>
+				<FB Name="ROUND_CYC_1" Type="E_CYCLE" Comment="" x="-2000.0" y="-1900.0">
+					<Parameter Name="DT" Value="T#1s"/>
+				</FB>
+				<FB Name="F_INT_TO_SINT" Type="F_INT_TO_SINT" Comment="" x="1800.0" y="4700.0">
+				</FB>
+				<FB Name="FB_CTD" Type="FB_CTD" Comment="" x="2040.0" y="5520.0">
+					<Parameter Name="PV" Value="5"/>
+				</FB>
+				<FB Name="LREAL2LREAL" Type="LREAL2LREAL" Comment="" x="2800.0" y="3100.0">
+				</FB>
+				<FB Name="INT2INT_1" Type="INT2INT" Comment="" x="2900.0" y="5600.0">
+				</FB>
+				<FB Name="SINT2SINT_1" Type="SINT2SINT" Comment="" x="2900.0" y="4700.0">
+				</FB>
+				<FB Name="E_CTU_1" Type="E_CTU" Comment="" x="8075.0" y="3410.0">
+				</FB>
+				<FB Name="E_PERMIT_3" Type="E_PERMIT" Comment="" x="7175.0" y="3410.0">
+				</FB>
+				<FB Name="E_PERMIT_2" Type="E_PERMIT" Comment="" x="800.0" y="4700.0">
+				</FB>
+				<FB Name="E_SR_1" Type="E_SR" Comment="" x="3000.0" y="3700.0">
+				</FB>
+				<FB Name="E_SWITCH_1" Type="E_SWITCH" Comment="" x="2000.0" y="3700.0">
+				</FB>
+				<FB Name="E_CYCLE_3" Type="E_CYCLE" Comment="" x="900.0" y="3700.0">
+					<Parameter Name="DT" Value="T#5s"/>
+				</FB>
+				<FB Name="FB_RANDOM_1" Type="FB_RANDOM" Comment="" x="1900.0" y="3000.0">
+					<Parameter Name="SEED" Value="20"/>
+				</FB>
+				<FB Name="E_CYCLE_2" Type="E_CYCLE" Comment="" x="900.0" y="3000.0">
+					<Parameter Name="DT" Value="T#10s"/>
+				</FB>
+				<FB Name="USINT2USINT" Type="USINT2USINT" Comment="" x="7200.0" y="4300.0">
+				</FB>
+				<FB Name="REAL2REAL_1" Type="REAL2REAL" Comment="" x="7200.0" y="2500.0">
+				</FB>
+				<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="7200.0" y="4900.0">
+				</FB>
+				<FB Name="MIXER_SP" Type="Mixer_Timer" Comment="" x="4000.0" y="-1100.0">
+					<Parameter Name="ROUND_CYC" Value="T#1s"/>
+					<Parameter Name="TX_DELAY_TRG" Value="T#300ms"/>
+					<Parameter Name="RD_TRG_CYC" Value="T#400ms"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="Tx_DELAY_1.EO" Destination="E_MERGE_1.EI1" Comment="" dx1="70.0"/>
+					<Connection Source="ROUND_CYC_1.EO" Destination="Tx_DELAY_1.START" Comment="" dx1="120.0"/>
+					<Connection Source="Mixer.INITO" Destination="PUBLISH_2.INIT" Comment=""/>
+					<Connection Source="TX_TRG.EO" Destination="E_MERGE_1.EI2" Comment=""/>
+					<Connection Source="SUBSCRIBE_2.IND" Destination="Mixer.REQ_RD" Comment=""/>
+					<Connection Source="START.COLD" Destination="SUBSCRIBE_2.INIT" Comment="" dx1="975.0"/>
+					<Connection Source="START.WARM" Destination="SUBSCRIBE_2.INIT" Comment="" dx1="975.0"/>
+					<Connection Source="Mixer.ESD" Destination="PUBLISH_2.REQ" Comment=""/>
+					<Connection Source="FB_CTD.CNF" Destination="F_INT_TO_SINT.REQ" Comment="" dx1="60.0" dx2="60.0" dy="-410.0"/>
+					<Connection Source="LREAL2LREAL.CNF" Destination="Mixer.REQ1" Comment="" dx1="1420.0"/>
+					<Connection Source="INT2INT_1.CNF" Destination="Mixer.REQ4" Comment="" dx1="1500.0"/>
+					<Connection Source="FB_CTD.CNF" Destination="INT2INT_1.REQ" Comment="" dx1="225.0"/>
+					<Connection Source="SINT2SINT_1.CNF" Destination="Mixer.REQ3" Comment="" dx1="1405.0"/>
+					<Connection Source="F_INT_TO_SINT.CNF" Destination="SINT2SINT_1.REQ" Comment=""/>
+					<Connection Source="E_PERMIT_3.EO" Destination="E_CTU_1.CU" Comment=""/>
+					<Connection Source="Mixer.ERD" Destination="E_PERMIT_3.EI" Comment="" dx1="490.0"/>
+					<Connection Source="E_PERMIT_2.EO" Destination="FB_CTD.REQ" Comment="" dx1="270.0"/>
+					<Connection Source="E_SR_1.EO" Destination="Mixer.REQ2" Comment="" dx1="1535.0"/>
+					<Connection Source="E_SR_1.EO" Destination="E_PERMIT_2.EI" Comment="" dx1="60.0" dx2="60.0" dy="680.0"/>
+					<Connection Source="E_SWITCH_1.EO1" Destination="E_SR_1.R" Comment=""/>
+					<Connection Source="E_SWITCH_1.EO0" Destination="E_SR_1.S" Comment=""/>
+					<Connection Source="E_CYCLE_3.EO" Destination="E_SWITCH_1.EI" Comment=""/>
+					<Connection Source="START.WARM" Destination="E_CYCLE_3.START" Comment="" dx1="325.0"/>
+					<Connection Source="START.COLD" Destination="E_CYCLE_3.START" Comment="" dx1="325.0"/>
+					<Connection Source="FB_RANDOM_1.CNF" Destination="LREAL2LREAL.REQ" Comment=""/>
+					<Connection Source="E_CYCLE_2.EO" Destination="FB_RANDOM_1.REQ" Comment="" dx1="225.0"/>
+					<Connection Source="START.WARM" Destination="E_CYCLE_2.START" Comment="" dx1="325.0"/>
+					<Connection Source="START.COLD" Destination="E_CYCLE_2.START" Comment="" dx1="325.0"/>
+					<Connection Source="Mixer.ERD" Destination="REAL2REAL_1.REQ" Comment="" dx1="500.0"/>
+					<Connection Source="Mixer.ERD" Destination="UINT2UINT.REQ" Comment="" dx1="500.0"/>
+					<Connection Source="Mixer.ERD" Destination="USINT2USINT.REQ" Comment="" dx1="500.0"/>
+					<Connection Source="START.COLD" Destination="Mixer.INIT" Comment="" dx1="1280.0" dx2="1280.0" dy="0.0"/>
+					<Connection Source="START.COLD" Destination="MIXER_SP.INIT" Comment="" dx1="1925.0"/>
+					<Connection Source="Mixer.ESD" Destination="MIXER_SP.ESD" Comment="" dx1="60.0" dx2="60.0" dy="-1720.0"/>
+					<Connection Source="MIXER_SP.ROUND_START" Destination="Mixer.ROUND_START" Comment="" dx1="225.0"/>
+					<Connection Source="MIXER_SP.TRANSMIT_TRG" Destination="Mixer.TRANSMIT_TRG" Comment="" dx1="225.0"/>
+					<Connection Source="MIXER_SP.SEND_RD" Destination="Mixer.SEND_RD" Comment="" dx1="225.0"/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="SUBSCRIBE_2.RD_1" Destination="Mixer.RD_IN" Comment="" dx1="930.0"/>
+					<Connection Source="Mixer.SD_OUT" Destination="PUBLISH_2.SD_1" Comment="" dx1="250.0"/>
+					<Connection Source="FB_CTD.CV" Destination="F_INT_TO_SINT.IN" Comment="" dx1="60.0" dx2="60.0" dy="-460.0"/>
+					<Connection Source="LREAL2LREAL.OUT" Destination="Mixer.SD_IN_1" Comment="" dx1="880.0"/>
+					<Connection Source="INT2INT_1.OUT" Destination="Mixer.SD_IN_4" Comment="" dx1="1500.0"/>
+					<Connection Source="FB_CTD.CV" Destination="INT2INT_1.IN" Comment="" dx1="225.0"/>
+					<Connection Source="SINT2SINT_1.OUT" Destination="Mixer.SD_IN_3" Comment="" dx1="1405.0"/>
+					<Connection Source="F_INT_TO_SINT.OUT" Destination="SINT2SINT_1.IN" Comment=""/>
+					<Connection Source="E_SR_1.Q" Destination="Mixer.SD_IN_2" Comment="" dx1="1535.0"/>
+					<Connection Source="E_SR_1.Q" Destination="E_PERMIT_2.PERMIT" Comment="" dx1="60.0" dx2="60.0" dy="330.0"/>
+					<Connection Source="E_SR_1.Q" Destination="FB_CTD.CD" Comment="" dx1="60.0" dx2="60.0" dy="2210.0"/>
+					<Connection Source="E_SR_1.Q" Destination="E_SWITCH_1.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+					<Connection Source="FB_RANDOM_1.VAL" Destination="LREAL2LREAL.IN" Comment=""/>
+					<Connection Source="Mixer.RD_OUT_2" Destination="E_PERMIT_3.PERMIT" Comment="" dx1="490.0" dx2="490.0" dy="0.0"/>
+					<Connection Source="Mixer.RD_OUT_1" Destination="REAL2REAL_1.IN" Comment="" dx1="500.0"/>
+					<Connection Source="Mixer.RD_OUT_3" Destination="USINT2USINT.IN" Comment="" dx1="500.0"/>
+					<Connection Source="Mixer.RD_OUT_4" Destination="UINT2UINT.IN" Comment="" dx1="500.0"/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Mapping From="TestSPApp.F_INT_TO_SINT" To="BeagleBoneBlack_1.EMB_RES.F_INT_TO_SINT"/>
+	<Mapping From="TestSPApp.FB_CTD" To="BeagleBoneBlack_1.EMB_RES.FB_CTD"/>
+	<Mapping From="TestSPApp.LREAL2LREAL" To="BeagleBoneBlack_1.EMB_RES.LREAL2LREAL"/>
+	<Mapping From="TestSPApp.USINT2USINT_1" To="BeagleBoneBlack.EMB_RES.USINT2USINT_1"/>
+	<Mapping From="TestSPApp.INT2INT_1" To="BeagleBoneBlack_1.EMB_RES.INT2INT_1"/>
+	<Mapping From="TestSPApp.UINT2UINT_1" To="BeagleBoneBlack.EMB_RES.UINT2UINT_1"/>
+	<Mapping From="TestSPApp.E_CTU_2" To="BeagleBoneBlack.EMB_RES.E_CTU_2"/>
+	<Mapping From="TestSPApp.SINT2SINT_1" To="BeagleBoneBlack_1.EMB_RES.SINT2SINT_1"/>
+	<Mapping From="TestSPApp.E_CTU_1" To="BeagleBoneBlack_1.EMB_RES.E_CTU_1"/>
+	<Mapping From="TestSPApp.E_PERMIT_3" To="BeagleBoneBlack_1.EMB_RES.E_PERMIT_3"/>
+	<Mapping From="TestSPApp.E_PERMIT_2" To="BeagleBoneBlack_1.EMB_RES.E_PERMIT_2"/>
+	<Mapping From="TestSPApp.E_SR_1" To="BeagleBoneBlack_1.EMB_RES.E_SR_1"/>
+	<Mapping From="TestSPApp.E_SWITCH_1" To="BeagleBoneBlack_1.EMB_RES.E_SWITCH_1"/>
+	<Mapping From="TestSPApp.E_CYCLE_3" To="BeagleBoneBlack_1.EMB_RES.E_CYCLE_3"/>
+	<Mapping From="TestSPApp.FB_RANDOM_1" To="BeagleBoneBlack_1.EMB_RES.FB_RANDOM_1"/>
+	<Mapping From="TestSPApp.E_CYCLE_2" To="BeagleBoneBlack_1.EMB_RES.E_CYCLE_2"/>
+	<Mapping From="TestSPApp.E_CTU" To="BeagleBoneBlack.EMB_RES.E_CTU"/>
+	<Mapping From="TestSPApp.E_PERMIT_1" To="BeagleBoneBlack.EMB_RES.E_PERMIT_1"/>
+	<Mapping From="TestSPApp.E_PERMIT" To="BeagleBoneBlack.EMB_RES.E_PERMIT"/>
+	<Mapping From="TestSPApp.E_SR" To="BeagleBoneBlack.EMB_RES.E_SR"/>
+	<Mapping From="TestSPApp.E_SWITCH" To="BeagleBoneBlack.EMB_RES.E_SWITCH"/>
+	<Mapping From="TestSPApp.E_CYCLE_1" To="BeagleBoneBlack.EMB_RES.E_CYCLE_1"/>
+	<Mapping From="TestSPApp.FB_RANDOM" To="BeagleBoneBlack.EMB_RES.FB_RANDOM"/>
+	<Mapping From="TestSPApp.E_CYCLE" To="BeagleBoneBlack.EMB_RES.E_CYCLE"/>
+	<Mapping From="TestSPApp.USINT2USINT" To="BeagleBoneBlack_1.EMB_RES.USINT2USINT"/>
+	<Mapping From="TestSPApp.REAL2REAL_1" To="BeagleBoneBlack_1.EMB_RES.REAL2REAL_1"/>
+	<Mapping From="TestSPApp.UINT2UINT" To="BeagleBoneBlack_1.EMB_RES.UINT2UINT"/>
+	<Mapping From="TestSPApp.LREAL2LREAL_1" To="BeagleBoneBlack.EMB_RES.LREAL2LREAL_1"/>
+	<Mapping From="TestSPApp.INT2INT" To="BeagleBoneBlack.EMB_RES.INT2INT"/>
+	<Mapping From="TestSPApp.SINT2SINT_2" To="BeagleBoneBlack.EMB_RES.SINT2SINT_2"/>
+	<Segment Name="Ethernet" Type="Ethernet" Comment="" x="1100.0" y="400.0" dx1="1500.0">
+		<Attribute Name="Color" Type="STRING" Value="37,173,195" Comment="color"/>
+	</Segment>
+	<Link SegmentName="Ethernet" CommResource="BeagleBoneBlack" Comment="">
+	</Link>
+	<Link SegmentName="Ethernet" CommResource="BeagleBoneBlack_1" Comment="">
+	</Link>
+</System>

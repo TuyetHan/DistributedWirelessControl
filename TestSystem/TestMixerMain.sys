@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="TestMixerMain" Comment="">
+	<VersionInfo Version="1.0" Author="ADMIN" Date="2024-03-03">
+	</VersionInfo>
+	<Application Name="TestMixerMainApp" Comment="">
+		<SubAppNetwork>
+			<FB Name="Mixer_Main" Type="Mixer_Main" Comment="" x="2395.0" y="1065.0">
+				<Parameter Name="NodeID" Value="1"/>
+				<Parameter Name="TotalNode" Value="3"/>
+				<Parameter Name="RD_OUT_ID" Value="&quot;6,7,8,9&quot;"/>
+				<Parameter Name="SD_IN_ID" Value="&quot;1,2,3,4&quot;"/>
+			</FB>
+			<FB Name="Mixer_Main_1" Type="Mixer_Main" Comment="" x="7500.0" y="1300.0">
+				<Parameter Name="NodeID" Value="2"/>
+				<Parameter Name="TotalNode" Value="3"/>
+			</FB>
+			<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="5800.0" y="1700.0">
+				<Parameter Name="QI" Value="1"/>
+				<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+			</FB>
+			<FB Name="PUBLISH_1" Type="PUBLISH_1" Comment="" x="4200.0" y="1700.0">
+				<Parameter Name="QI" Value="1"/>
+				<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+			</FB>
+			<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="4000.0" y="5900.0">
+			</FB>
+			<FB Name="BOOL2BOOL" Type="BOOL2BOOL" Comment="" x="4000.0" y="5300.0">
+			</FB>
+			<FB Name="LREAL2LREAL_1" Type="LREAL2LREAL" Comment="" x="4000.0" y="4600.0">
+			</FB>
+			<FB Name="LREAL2LREAL" Type="LREAL2LREAL" Comment="" x="4000.0" y="3900.0">
+			</FB>
+			<FB Name="E_DELAY_1" Type="E_DELAY" Comment="" x="1000.0" y="500.0">
+				<Parameter Name="DT" Value="T#50ms"/>
+			</FB>
+			<FB Name="E_CTUD" Type="E_CTUD" Comment="" x="0.0" y="4300.0">
+				<Parameter Name="PV" Value="50"/>
+			</FB>
+			<FB Name="E_PERMIT" Type="E_PERMIT" Comment="" x="-800.0" y="4400.0">
+			</FB>
+			<FB Name="FB_RANDOM" Type="FB_RANDOM" Comment="" x="-100.0" y="1600.0">
+				<Parameter Name="SEED" Value="20"/>
+			</FB>
+			<FB Name="E_CYCLE_1" Type="E_CYCLE" Comment="" x="-2000.0" y="3400.0">
+				<Parameter Name="DT" Value="T#10s"/>
+			</FB>
+			<FB Name="E_SR" Type="E_SR" Comment="" x="100.0" y="3400.0">
+			</FB>
+			<FB Name="E_SWITCH" Type="E_SWITCH" Comment="" x="-900.0" y="3400.0">
+			</FB>
+			<FB Name="FB_RANDOM_1" Type="FB_RANDOM" Comment="" x="-100.0" y="2300.0">
+				<Parameter Name="SEED" Value="30"/>
+			</FB>
+			<FB Name="E_DELAY" Type="E_DELAY" Comment="" x="-1000.0" y="2300.0">
+				<Parameter Name="DT" Value="T#1000ms"/>
+			</FB>
+			<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="-2100.0" y="1700.0">
+				<Parameter Name="DT" Value="T#20s"/>
+			</FB>
+			<EventConnections>
+				<Connection Source="Mixer_Main.ERD" Destination="LREAL2LREAL.REQ" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.ERD" Destination="LREAL2LREAL_1.REQ" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.ERD" Destination="BOOL2BOOL.REQ" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.ERD" Destination="UINT2UINT.REQ" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.INITO" Destination="PUBLISH_1.INIT" Comment="" dx1="720.0"/>
+				<Connection Source="Mixer_Main.ESD" Destination="PUBLISH_1.REQ" Comment="" dx1="720.0"/>
+				<Connection Source="Mixer_Main.ESD" Destination="E_DELAY_1.START" Comment="" dx1="60.0" dx2="60.0" dy="-940.0"/>
+				<Connection Source="E_DELAY_1.EO" Destination="Mixer_Main.TRANSMIT_TRG" Comment="" dx1="420.0"/>
+				<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
+				<Connection Source="E_CYCLE.EO" Destination="E_DELAY.START" Comment="" dx1="270.0"/>
+				<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
+				<Connection Source="E_CYCLE_1.EO" Destination="E_SWITCH.EI" Comment=""/>
+				<Connection Source="E_DELAY.EO" Destination="FB_RANDOM_1.REQ" Comment="" dx1="170.0"/>
+				<Connection Source="E_SR.EO" Destination="E_PERMIT.EI" Comment="" dx1="185.0" dx2="185.0" dy="610.0"/>
+				<Connection Source="E_PERMIT.EO" Destination="E_CTUD.CU" Comment="" dx1="140.0"/>
+				<Connection Source="E_CYCLE.EO" Destination="FB_RANDOM.REQ" Comment=""/>
+				<Connection Source="FB_RANDOM.CNF" Destination="Mixer_Main.REQ1" Comment="" dx1="925.0"/>
+				<Connection Source="FB_RANDOM_1.CNF" Destination="Mixer_Main.REQ2" Comment="" dx1="925.0"/>
+				<Connection Source="E_SR.EO" Destination="Mixer_Main.REQ3" Comment="" dx1="935.0"/>
+				<Connection Source="E_CTUD.CO" Destination="Mixer_Main.REQ4" Comment="" dx1="940.0"/>
+				<Connection Source="SUBSCRIBE_1.IND" Destination="Mixer_Main_1.REQ_RD" Comment="" dx1="605.0"/>
+				<Connection Source="SUBSCRIBE_1.INITO" Destination="Mixer_Main_1.INIT" Comment="" dx1="605.0"/>
+				<Connection Source="FB_RANDOM.INITO" Destination="Mixer_Main.INIT" Comment="" dx1="925.0"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="Mixer_Main.RD_OUT_1" Destination="LREAL2LREAL.IN" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.RD_OUT_2" Destination="LREAL2LREAL_1.IN" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.RD_OUT_3" Destination="BOOL2BOOL.IN" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.RD_OUT_4" Destination="UINT2UINT.IN" Comment="" dx1="355.0"/>
+				<Connection Source="Mixer_Main.SD_OUT" Destination="PUBLISH_1.SD_1" Comment="" dx1="720.0"/>
+				<Connection Source="E_SR.Q" Destination="E_PERMIT.PERMIT" Comment="" dx1="55.0" dx2="55.0" dy="125.0"/>
+				<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+				<Connection Source="FB_RANDOM.VAL" Destination="Mixer_Main.SD_IN_1" Comment="" dx1="925.0"/>
+				<Connection Source="FB_RANDOM_1.VAL" Destination="Mixer_Main.SD_IN_2" Comment="" dx1="925.0"/>
+				<Connection Source="E_SR.Q" Destination="Mixer_Main.SD_IN_3" Comment="" dx1="935.0"/>
+				<Connection Source="E_CTUD.CV" Destination="Mixer_Main.SD_IN_4" Comment="" dx1="940.0"/>
+				<Connection Source="SUBSCRIBE_1.RD_1" Destination="Mixer_Main_1.RD_IN" Comment="" dx1="605.0"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="1600.0" y="1700.0">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61500&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111" Comment="color"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="Mixer_Main" Type="Mixer_Main" Comment="" x="2395.0" y="1065.0">
+					<Parameter Name="NodeID" Value="1"/>
+					<Parameter Name="TotalNode" Value="3"/>
+					<Parameter Name="RD_OUT_ID" Value="&quot;6,7,8,9&quot;"/>
+					<Parameter Name="SD_IN_ID" Value="&quot;1,2,3,4&quot;"/>
+				</FB>
+				<FB Name="E_SWITCH" Type="E_SWITCH" Comment="" x="-900.0" y="3400.0">
+				</FB>
+				<FB Name="E_PERMIT" Type="E_PERMIT" Comment="" x="-800.0" y="4400.0">
+				</FB>
+				<FB Name="LREAL2LREAL" Type="LREAL2LREAL" Comment="" x="4000.0" y="3900.0">
+				</FB>
+				<FB Name="E_CTUD" Type="E_CTUD" Comment="" x="0.0" y="4300.0">
+					<Parameter Name="PV" Value="50"/>
+				</FB>
+				<FB Name="BOOL2BOOL" Type="BOOL2BOOL" Comment="" x="4000.0" y="5300.0">
+				</FB>
+				<FB Name="PUBLISH_1" Type="PUBLISH_1" Comment="" x="4200.0" y="1700.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="E_DELAY_1" Type="E_DELAY" Comment="" x="1000.0" y="500.0">
+					<Parameter Name="DT" Value="T#50ms"/>
+				</FB>
+				<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="4000.0" y="5900.0">
+				</FB>
+				<FB Name="E_CYCLE" Type="E_CYCLE" Comment="" x="-2100.0" y="1700.0">
+					<Parameter Name="DT" Value="T#20s"/>
+				</FB>
+				<FB Name="E_CYCLE_1" Type="E_CYCLE" Comment="" x="-2000.0" y="3400.0">
+					<Parameter Name="DT" Value="T#10s"/>
+				</FB>
+				<FB Name="FB_RANDOM" Type="FB_RANDOM" Comment="" x="-100.0" y="1600.0">
+					<Parameter Name="SEED" Value="20"/>
+				</FB>
+				<FB Name="E_SR" Type="E_SR" Comment="" x="100.0" y="3400.0">
+				</FB>
+				<FB Name="LREAL2LREAL_1" Type="LREAL2LREAL" Comment="" x="4000.0" y="4600.0">
+				</FB>
+				<FB Name="FB_RANDOM_1" Type="FB_RANDOM" Comment="" x="-100.0" y="2300.0">
+					<Parameter Name="SEED" Value="30"/>
+				</FB>
+				<FB Name="E_DELAY" Type="E_DELAY" Comment="" x="-1000.0" y="2300.0">
+					<Parameter Name="DT" Value="T#1000ms"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="Mixer_Main.ERD" Destination="LREAL2LREAL.REQ" Comment="" dx1="360.0"/>
+					<Connection Source="E_PERMIT.EO" Destination="E_CTUD.CU" Comment="" dx1="100.0"/>
+					<Connection Source="E_CTUD.CO" Destination="Mixer_Main.REQ4" Comment="" dx1="945.0"/>
+					<Connection Source="Mixer_Main.ERD" Destination="BOOL2BOOL.REQ" Comment="" dx1="360.0"/>
+					<Connection Source="Mixer_Main.INITO" Destination="PUBLISH_1.INIT" Comment="" dx1="460.0"/>
+					<Connection Source="Mixer_Main.ESD" Destination="PUBLISH_1.REQ" Comment="" dx1="460.0"/>
+					<Connection Source="Mixer_Main.ESD" Destination="E_DELAY_1.START" Comment="" dx1="60.0" dx2="60.0" dy="-330.0"/>
+					<Connection Source="E_DELAY_1.EO" Destination="Mixer_Main.TRANSMIT_TRG" Comment="" dx1="420.0"/>
+					<Connection Source="Mixer_Main.ERD" Destination="UINT2UINT.REQ" Comment="" dx1="360.0"/>
+					<Connection Source="E_CYCLE_1.EO" Destination="E_SWITCH.EI" Comment=""/>
+					<Connection Source="E_CYCLE.EO" Destination="FB_RANDOM.REQ" Comment=""/>
+					<Connection Source="FB_RANDOM.CNF" Destination="Mixer_Main.REQ1" Comment="" dx1="925.0"/>
+					<Connection Source="E_SWITCH.EO0" Destination="E_SR.S" Comment=""/>
+					<Connection Source="E_SWITCH.EO1" Destination="E_SR.R" Comment=""/>
+					<Connection Source="E_SR.EO" Destination="E_PERMIT.EI" Comment="" dx1="60.0" dx2="60.0" dy="500.0"/>
+					<Connection Source="E_SR.EO" Destination="Mixer_Main.REQ3" Comment="" dx1="940.0"/>
+					<Connection Source="Mixer_Main.ERD" Destination="LREAL2LREAL_1.REQ" Comment="" dx1="360.0"/>
+					<Connection Source="FB_RANDOM_1.CNF" Destination="Mixer_Main.REQ2" Comment="" dx1="925.0"/>
+					<Connection Source="E_CYCLE.EO" Destination="E_DELAY.START" Comment="" dx1="275.0"/>
+					<Connection Source="E_DELAY.EO" Destination="FB_RANDOM_1.REQ" Comment="" dx1="175.0"/>
+					<Connection Source="START.COLD" Destination="E_CYCLE.START" Comment="" dx1="430.0"/>
+					<Connection Source="START.COLD" Destination="FB_RANDOM.INIT" Comment="" dx1="1430.0"/>
+					<Connection Source="START.COLD" Destination="FB_RANDOM_1.INIT" Comment="" dx1="1430.0"/>
+					<Connection Source="START.COLD" Destination="E_CYCLE_1.START" Comment="" dx1="480.0"/>
+					<Connection Source="FB_RANDOM.INITO" Destination="Mixer_Main.INIT" Comment="" dx1="925.0"/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="Mixer_Main.RD_OUT_1" Destination="LREAL2LREAL.IN" Comment="" dx1="360.0"/>
+					<Connection Source="E_CTUD.CV" Destination="Mixer_Main.SD_IN_4" Comment="" dx1="945.0"/>
+					<Connection Source="Mixer_Main.RD_OUT_3" Destination="BOOL2BOOL.IN" Comment="" dx1="360.0"/>
+					<Connection Source="Mixer_Main.SD_OUT" Destination="PUBLISH_1.SD_1" Comment="" dx1="460.0"/>
+					<Connection Source="Mixer_Main.RD_OUT_4" Destination="UINT2UINT.IN" Comment="" dx1="360.0"/>
+					<Connection Source="FB_RANDOM.VAL" Destination="Mixer_Main.SD_IN_1" Comment="" dx1="925.0"/>
+					<Connection Source="E_SR.Q" Destination="E_PERMIT.PERMIT" Comment="" dx1="60.0" dx2="60.0" dy="450.0"/>
+					<Connection Source="E_SR.Q" Destination="E_SWITCH.G" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+					<Connection Source="E_SR.Q" Destination="Mixer_Main.SD_IN_3" Comment="" dx1="940.0"/>
+					<Connection Source="Mixer_Main.RD_OUT_2" Destination="LREAL2LREAL_1.IN" Comment="" dx1="360.0"/>
+					<Connection Source="FB_RANDOM_1.VAL" Destination="Mixer_Main.SD_IN_2" Comment="" dx1="925.0"/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Device Name="FORTE_PC_1" Type="FORTE_PC" Comment="" x="4225.0" y="1625.0">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61501&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="40,225,88" Comment="color"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="5900.0" y="1700.0">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="ID" Value="&quot;225.0.0.1:61499&quot;"/>
+				</FB>
+				<FB Name="Mixer_Main_1" Type="Mixer_Main" Comment="" x="7000.0" y="1100.0">
+					<Parameter Name="NodeID" Value="2"/>
+					<Parameter Name="TotalNode" Value="3"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="SUBSCRIBE_1.IND" Destination="Mixer_Main_1.REQ_RD" Comment="" dx1="185.0"/>
+					<Connection Source="SUBSCRIBE_1.INITO" Destination="Mixer_Main_1.INIT" Comment="" dx1="185.0"/>
+					<Connection Source="START.COLD" Destination="SUBSCRIBE_1.INIT" Comment="" dx1="930.0"/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="SUBSCRIBE_1.RD_1" Destination="Mixer_Main_1.RD_IN" Comment="" dx1="185.0"/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Mapping From="TestMixerMainApp.Mixer_Main" To="FORTE_PC.EMB_RES.Mixer_Main"/>
+	<Mapping From="TestMixerMainApp.E_SWITCH" To="FORTE_PC.EMB_RES.E_SWITCH"/>
+	<Mapping From="TestMixerMainApp.E_PERMIT" To="FORTE_PC.EMB_RES.E_PERMIT"/>
+	<Mapping From="TestMixerMainApp.LREAL2LREAL" To="FORTE_PC.EMB_RES.LREAL2LREAL"/>
+	<Mapping From="TestMixerMainApp.E_CTUD" To="FORTE_PC.EMB_RES.E_CTUD"/>
+	<Mapping From="TestMixerMainApp.BOOL2BOOL" To="FORTE_PC.EMB_RES.BOOL2BOOL"/>
+	<Mapping From="TestMixerMainApp.PUBLISH_1" To="FORTE_PC.EMB_RES.PUBLISH_1"/>
+	<Mapping From="TestMixerMainApp.E_DELAY_1" To="FORTE_PC.EMB_RES.E_DELAY_1"/>
+	<Mapping From="TestMixerMainApp.UINT2UINT" To="FORTE_PC.EMB_RES.UINT2UINT"/>
+	<Mapping From="TestMixerMainApp.E_CYCLE" To="FORTE_PC.EMB_RES.E_CYCLE"/>
+	<Mapping From="TestMixerMainApp.E_CYCLE_1" To="FORTE_PC.EMB_RES.E_CYCLE_1"/>
+	<Mapping From="TestMixerMainApp.FB_RANDOM" To="FORTE_PC.EMB_RES.FB_RANDOM"/>
+	<Mapping From="TestMixerMainApp.E_SR" To="FORTE_PC.EMB_RES.E_SR"/>
+	<Mapping From="TestMixerMainApp.LREAL2LREAL_1" To="FORTE_PC.EMB_RES.LREAL2LREAL_1"/>
+	<Mapping From="TestMixerMainApp.FB_RANDOM_1" To="FORTE_PC.EMB_RES.FB_RANDOM_1"/>
+	<Mapping From="TestMixerMainApp.E_DELAY" To="FORTE_PC.EMB_RES.E_DELAY"/>
+	<Mapping From="TestMixerMainApp.SUBSCRIBE_1" To="FORTE_PC_1.EMB_RES.SUBSCRIBE_1"/>
+	<Mapping From="TestMixerMainApp.Mixer_Main_1" To="FORTE_PC_1.EMB_RES.Mixer_Main_1"/>
+	<Segment Name="Ethernet" Type="Ethernet" Comment="" x="2200.0" y="1100.0" dx1="1500.0">
+		<Attribute Name="Color" Type="STRING" Value="138,66,197" Comment="color"/>
+	</Segment>
+	<Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment="">
+	</Link>
+	<Link SegmentName="Ethernet" CommResource="FORTE_PC_1" Comment="">
+	</Link>
+</System>
