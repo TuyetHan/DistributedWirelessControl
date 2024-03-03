@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="Mixer_Main" Comment="Service Interface Function Block Type">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="ADMIN" Date="2023-08-25">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="INIT" Type="Event" Comment="Service Initialization">
+				<With Var="QI"/>
+				<With Var="NodeID"/>
+				<With Var="TotalNode"/>
+				<With Var="RD_OUT_ID"/>
+				<With Var="SD_IN_ID"/>
+			</Event>
+			<Event Name="ROUND_START" Type="Event" Comment="">
+			</Event>
+			<Event Name="TRANSMIT_TRG" Type="Event" Comment="">
+			</Event>
+			<Event Name="SEND_RD" Type="Event" Comment="">
+			</Event>
+			<Event Name="REQ_RD" Type="Event" Comment="">
+				<With Var="RD_IN"/>
+			</Event>
+			<Event Name="REQ1" Type="Event" Comment="">
+				<With Var="SD_IN_1"/>
+			</Event>
+			<Event Name="REQ2" Type="Event" Comment="">
+				<With Var="SD_IN_2"/>
+			</Event>
+			<Event Name="REQ3" Type="Event" Comment="">
+				<With Var="SD_IN_3"/>
+			</Event>
+			<Event Name="REQ4" Type="Event" Comment="">
+				<With Var="SD_IN_4"/>
+			</Event>
+			<Event Name="REQ5" Type="Event" Comment="">
+				<With Var="SD_IN_5"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="INITO" Type="Event" Comment="Initialization Confirm">
+				<With Var="QO"/>
+				<With Var="STATUS"/>
+			</Event>
+			<Event Name="ESD" Type="Event" Comment="Confirmation of Requested Service">
+				<With Var="QO"/>
+				<With Var="STATUS"/>
+				<With Var="SD_OUT"/>
+			</Event>
+			<Event Name="ERD" Type="Event" Comment="">
+				<With Var="RD_OUT_1"/>
+				<With Var="QO"/>
+				<With Var="STATUS"/>
+				<With Var="RD_OUT_2"/>
+				<With Var="RD_OUT_3"/>
+				<With Var="RD_OUT_4"/>
+				<With Var="RD_OUT_5"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="QI" Type="BOOL" Comment="Event Input Qualifier"/>
+			<VarDeclaration Name="NodeID" Type="UINT" Comment="Current Node ID"/>
+			<VarDeclaration Name="TotalNode" Type="UINT" Comment="Total Node in System"/>
+			<VarDeclaration Name="RD_OUT_ID" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="SD_IN_ID" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="SD_IN_1" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_IN_2" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_IN_3" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_IN_4" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_IN_5" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_IN" Type="UDINT" Comment="Data from Network"/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="QO" Type="BOOL" Comment="Event Output Qualifier"/>
+			<VarDeclaration Name="STATUS" Type="WSTRING" Comment="Service Status"/>
+			<VarDeclaration Name="RD_OUT_1" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_OUT_2" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_OUT_3" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_OUT_4" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_OUT_5" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_OUT" Type="UDINT" Comment="Send Data to Network"/>
+		</OutputVars>
+	</InterfaceList>
+	<Service RightInterface="RESOURCE" LeftInterface="APPLICATION" Comment="Service Interface Function Block Type">
+	</Service>
+</FBType>

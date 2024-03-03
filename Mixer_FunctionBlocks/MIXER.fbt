@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="MIXER" Comment="Mixer Communication Block V1">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="ADMIN" Date="2023-08-25">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="INIT" Type="Event" Comment="Initialization Request">
+				<With Var="QI"/>
+				<With Var="NodeID"/>
+				<With Var="TotalNode"/>
+				<With Var="TrsRcvID"/>
+				<With Var="ROUND_CYC"/>
+				<With Var="TX_DELAY_TRG"/>
+				<With Var="RD_TRG_CYC"/>
+				<With Var="RD_Port_ID"/>
+				<With Var="SD_Port_ID"/>
+			</Event>
+			<Event Name="R_SD1" Type="Event" Comment="Normal Execution Request">
+				<With Var="SD_1"/>
+			</Event>
+			<Event Name="R_SD2" Type="Event" Comment="">
+				<With Var="SD_2"/>
+			</Event>
+			<Event Name="R_SD3" Type="Event" Comment="">
+				<With Var="SD_3"/>
+			</Event>
+			<Event Name="R_SD4" Type="Event" Comment="">
+				<With Var="SD_4"/>
+			</Event>
+			<Event Name="R_SD5" Type="Event" Comment="">
+				<With Var="SD_5"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="INITO" Type="Event" Comment="Initialization Confirm">
+			</Event>
+			<Event Name="CNF" Type="Event" Comment="Execution Confirmation">
+				<With Var="QO_RX"/>
+				<With Var="RX_STATUS"/>
+				<With Var="RD_1"/>
+				<With Var="RD_2"/>
+				<With Var="RD_3"/>
+				<With Var="RD_4"/>
+				<With Var="RD_5"/>
+				<With Var="TX_STATUS"/>
+				<With Var="QO_TX"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="ROUND_CYC" Type="TIME" Comment=""/>
+			<VarDeclaration Name="TX_DELAY_TRG" Type="TIME" Comment=""/>
+			<VarDeclaration Name="RD_TRG_CYC" Type="TIME" Comment=""/>
+			<VarDeclaration Name="QI" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="NodeID" Type="UINT" Comment=""/>
+			<VarDeclaration Name="TotalNode" Type="UINT" Comment=""/>
+			<VarDeclaration Name="RD_Port_ID" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="SD_Port_ID" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="SD_1" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_2" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_3" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_4" Type="ANY" Comment=""/>
+			<VarDeclaration Name="SD_5" Type="ANY" Comment=""/>
+			<VarDeclaration Name="TrsRcvID" Type="WSTRING" Comment=""/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="QO_RX" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="QO_TX" Type="BOOL" Comment=""/>
+			<VarDeclaration Name="RX_STATUS" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="TX_STATUS" Type="WSTRING" Comment=""/>
+			<VarDeclaration Name="RD_1" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_2" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_3" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_4" Type="ANY" Comment=""/>
+			<VarDeclaration Name="RD_5" Type="ANY" Comment=""/>
+		</OutputVars>
+	</InterfaceList>
+	<FBNetwork>
+		<FB Name="ROUND_CYCLE" Type="E_CYCLE" Comment="" x="-3800.0" y="-1900.0">
+		</FB>
+		<FB Name="TX_TRIGGER" Type="E_DELAY" Comment="" x="-2800.0" y="-1500.0">
+		</FB>
+		<FB Name="PUBLISH_1" Type="PUBLISH_1" Comment="" x="-3000.0" y="2900.0">
+			<Parameter Name="QI" Value="1"/>
+		</FB>
+		<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="-3000.0" y="2000.0">
+			<Parameter Name="QI" Value="1"/>
+		</FB>
+		<FB Name="E_MERGE" Type="E_MERGE" Comment="" x="-2000.0" y="-700.0">
+		</FB>
+		<FB Name="DataProcessing_1" Type="DataProcessing" Comment="" x="-1000.0" y="-400.0">
+		</FB>
+		<FB Name="E_DELAY_1" Type="E_DELAY" Comment="" x="-2800.0" y="-800.0">
+			<Parameter Name="DT" Value="T#5ms"/>
+		</FB>
+		<FB Name="RD_SEND_CYCLE" Type="E_CYCLE" Comment="" x="-3800.0" y="-1000.0">
+		</FB>
+		<EventConnections>
+			<Connection Source="ROUND_CYCLE.EO" Destination="TX_TRIGGER.START" Comment="" dx1="185.0"/>
+			<Connection Source="INIT" Destination="DataProcessing_1.INIT" Comment="" dx1="3710.0"/>
+			<Connection Source="ROUND_CYCLE.EO" Destination="DataProcessing_1.ROUND_START" Comment="" dx1="1950.0"/>
+			<Connection Source="DataProcessing_1.ESD" Destination="PUBLISH_1.REQ" Comment="" dx1="300.0" dx2="215.0" dy="3970.0"/>
+			<Connection Source="TX_TRIGGER.EO" Destination="E_MERGE.EI1" Comment="" dx1="70.0"/>
+			<Connection Source="E_MERGE.EO" Destination="DataProcessing_1.TRANSMIT_TRG" Comment="" dx1="145.0"/>
+			<Connection Source="E_DELAY_1.EO" Destination="E_MERGE.EI1" Comment="" dx1="70.0"/>
+			<Connection Source="DataProcessing_1.ESD" Destination="E_DELAY_1.START" Comment="" dx1="300.0" dx2="60.0" dy="-715.0"/>
+			<Connection Source="R_SD1" Destination="DataProcessing_1.REQ1" Comment="" dx1="745.0"/>
+			<Connection Source="R_SD2" Destination="DataProcessing_1.REQ2" Comment="" dx1="750.0"/>
+			<Connection Source="R_SD3" Destination="DataProcessing_1.REQ3" Comment="" dx1="745.0"/>
+			<Connection Source="R_SD4" Destination="DataProcessing_1.REQ4" Comment="" dx1="740.0"/>
+			<Connection Source="R_SD5" Destination="DataProcessing_1.REQ5" Comment="" dx1="740.0"/>
+			<Connection Source="SUBSCRIBE_1.IND" Destination="DataProcessing_1.REQ_RD" Comment="" dx1="605.0"/>
+			<Connection Source="INIT" Destination="ROUND_CYCLE.START" Comment="" dx1="880.0"/>
+			<Connection Source="INIT" Destination="RD_SEND_CYCLE.START" Comment="" dx1="875.0"/>
+			<Connection Source="INIT" Destination="SUBSCRIBE_1.INIT" Comment="" dx1="870.0"/>
+			<Connection Source="INIT" Destination="PUBLISH_1.INIT" Comment="" dx1="870.0"/>
+			<Connection Source="DataProcessing_1.INITO" Destination="INITO" Comment="" dx1="585.0" dx2="875.0" dy="0.0"/>
+			<Connection Source="RD_SEND_CYCLE.EO" Destination="DataProcessing_1.SEND_RD" Comment="" dx1="60.0"/>
+			<Connection Source="DataProcessing_1.ERD" Destination="CNF" Comment="" dx1="2350.0"/>
+		</EventConnections>
+		<DataConnections>
+			<Connection Source="SUBSCRIBE_1.STATUS" Destination="RX_STATUS" Comment="" dx1="2885.0"/>
+			<Connection Source="PUBLISH_1.STATUS" Destination="TX_STATUS" Comment="" dx1="2975.0"/>
+			<Connection Source="SUBSCRIBE_1.QO" Destination="QO_RX" Comment="" dx1="2885.0"/>
+			<Connection Source="PUBLISH_1.QO" Destination="QO_TX" Comment="" dx1="2975.0"/>
+			<Connection Source="TrsRcvID" Destination="SUBSCRIBE_1.ID" Comment="" dx1="270.0"/>
+			<Connection Source="TrsRcvID" Destination="PUBLISH_1.ID" Comment="" dx1="270.0"/>
+			<Connection Source="DataProcessing_1.SD_OUT" Destination="PUBLISH_1.SD_1" Comment="" dx1="295.0" dx2="215.0" dy="2210.0"/>
+			<Connection Source="QI" Destination="DataProcessing_1.QI" Comment="" dx1="590.0"/>
+			<Connection Source="NodeID" Destination="DataProcessing_1.NodeID" Comment="" dx1="585.0"/>
+			<Connection Source="TotalNode" Destination="DataProcessing_1.TotalNode" Comment="" dx1="585.0"/>
+			<Connection Source="SUBSCRIBE_1.RD_1" Destination="DataProcessing_1.RD_IN" Comment="" dx1="605.0"/>
+			<Connection Source="RD_Port_ID" Destination="DataProcessing_1.RD_OUT_ID" Comment="" dx1="590.0"/>
+			<Connection Source="SD_Port_ID" Destination="DataProcessing_1.SD_IN_ID" Comment="" dx1="585.0"/>
+			<Connection Source="SD_1" Destination="DataProcessing_1.SD_IN_1" Comment="" dx1="420.0"/>
+			<Connection Source="SD_2" Destination="DataProcessing_1.SD_IN_2" Comment="" dx1="420.0"/>
+			<Connection Source="SD_3" Destination="DataProcessing_1.SD_IN_3" Comment="" dx1="420.0"/>
+			<Connection Source="SD_4" Destination="DataProcessing_1.SD_IN_4" Comment="" dx1="420.0"/>
+			<Connection Source="SD_5" Destination="DataProcessing_1.SD_IN_5" Comment="" dx1="420.0"/>
+			<Connection Source="RD_TRG_CYC" Destination="RD_SEND_CYCLE.DT" Comment="" dx1="1055.0"/>
+			<Connection Source="ROUND_CYC" Destination="ROUND_CYCLE.DT" Comment="" dx1="600.0"/>
+			<Connection Source="TX_DELAY_TRG" Destination="TX_TRIGGER.DT" Comment="" dx1="1950.0"/>
+			<Connection Source="DataProcessing_1.RD_OUT_5" Destination="RD_5" Comment="" dx1="725.0"/>
+			<Connection Source="DataProcessing_1.RD_OUT_4" Destination="RD_4" Comment="" dx1="725.0" dx2="380.0" dy="0.0"/>
+			<Connection Source="DataProcessing_1.RD_OUT_3" Destination="RD_3" Comment="" dx1="730.0" dx2="550.0" dy="0.0"/>
+			<Connection Source="DataProcessing_1.RD_OUT_2" Destination="RD_2" Comment="" dx1="730.0" dx2="550.0" dy="0.0"/>
+			<Connection Source="DataProcessing_1.RD_OUT_1" Destination="RD_1" Comment="" dx1="725.0" dx2="550.0" dy="0.0"/>
+		</DataConnections>
+	</FBNetwork>
+</FBType>

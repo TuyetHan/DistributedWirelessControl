@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FBType Name="Mixer_Timer" Comment="Composite FB wrapping other FBs">
+	<Identification Standard="61499-2">
+	</Identification>
+	<VersionInfo Version="1.0" Author="ADMIN" Date="2024-02-16">
+	</VersionInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="INIT" Type="Event" Comment="Initialization Request">
+				<With Var="ROUND_CYC"/>
+				<With Var="TX_DELAY_TRG"/>
+				<With Var="RD_TRG_CYC"/>
+			</Event>
+			<Event Name="ESD" Type="Event" Comment="Normal Execution Request">
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="ROUND_START" Type="Event" Comment="Execution Confirmation">
+			</Event>
+			<Event Name="TRANSMIT_TRG" Type="Event" Comment="">
+			</Event>
+			<Event Name="SEND_RD" Type="Event" Comment="">
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="ROUND_CYC" Type="TIME" Comment="Input event qualifier"/>
+			<VarDeclaration Name="TX_DELAY_TRG" Type="TIME" Comment=""/>
+			<VarDeclaration Name="RD_TRG_CYC" Type="TIME" Comment=""/>
+		</InputVars>
+	</InterfaceList>
+	<FBNetwork>
+		<FB Name="ROUND_CYC" Type="E_CYCLE" Comment="" x="-200.0" y="100.0">
+		</FB>
+		<FB Name="Tx_DELAY" Type="E_DELAY" Comment="" x="500.0" y="300.0">
+		</FB>
+		<FB Name="E_MERGE" Type="E_MERGE" Comment="" x="1300.0" y="800.0">
+		</FB>
+		<FB Name="Tx_Cyc" Type="E_DELAY" Comment="" x="-200.0" y="900.0">
+			<Parameter Name="DT" Value="T#5ms"/>
+		</FB>
+		<FB Name="Rx_TRG_CYC" Type="E_CYCLE" Comment="" x="600.0" y="1400.0">
+		</FB>
+		<EventConnections>
+			<Connection Source="Tx_DELAY.EO" Destination="E_MERGE.EI1" Comment="" dx1="90.0"/>
+			<Connection Source="ROUND_CYC.EO" Destination="Tx_DELAY.START" Comment="" dx1="90.0"/>
+			<Connection Source="Tx_Cyc.EO" Destination="E_MERGE.EI2" Comment=""/>
+			<Connection Source="INIT" Destination="ROUND_CYC.START" Comment="" dx1="430.0"/>
+			<Connection Source="ROUND_CYC.EO" Destination="ROUND_START" Comment="" dx1="2145.0"/>
+			<Connection Source="E_MERGE.EO" Destination="TRANSMIT_TRG" Comment="" dx1="645.0"/>
+			<Connection Source="Rx_TRG_CYC.EO" Destination="SEND_RD" Comment="" dx1="1440.0"/>
+			<Connection Source="ESD" Destination="Tx_Cyc.START" Comment="" dx1="430.0"/>
+			<Connection Source="INIT" Destination="Rx_TRG_CYC.START" Comment="" dx1="430.0"/>
+		</EventConnections>
+		<DataConnections>
+			<Connection Source="ROUND_CYC" Destination="ROUND_CYC.DT" Comment="" dx1="430.0"/>
+			<Connection Source="TX_DELAY_TRG" Destination="Tx_DELAY.DT" Comment="" dx1="430.0"/>
+			<Connection Source="RD_TRG_CYC" Destination="Rx_TRG_CYC.DT" Comment="" dx1="430.0"/>
+		</DataConnections>
+	</FBNetwork>
+</FBType>
