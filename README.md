@@ -25,13 +25,48 @@ Advance:
 - Improving Finalization: Smart Shutdown.
 
 ## General Architecture
-Below is the architecture for config communication. The FB square block represents all application Function Blocks which need to send or receive data via networks. The sending data needs to be sent to MERGE FB before being sent to MIXER. In the opposite direction, the received data needs to be sent to UNMERGE FB before being sent to application Function Blocks.
+Below is the architecture for config communication. The FB square block represents all application Function Blocks which need to send or receive data via networks. The sending data can connect to SD_IN_x Port on Mixer_Main and receiving data can be obtained via RD_OUT_x Port on Mixer_Main. (Note: x from 1 to 5) 
 
-![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/811f43d0-402c-4a60-8f77-1d9dd5e092a1)
+![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/4a6546ae-190d-4781-8e36-370d99f4de6b)
+
+## Mixer User Guideline
+![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/a60e55ba-31e5-4113-b1e4-5ec3e8a4db06)
+
+Application Data Connection: Use to receive and transmit data from and to the application function block. Application FBs are FBs not responsible for Mixer communication but rather FBs used for running user-defined applications.
+- SD_IN_1 to SD_IN_5: Send Data Input.
+- REQ1 to REQ5: Event for SD_IN_1 to SD_IN_5.
+- RD_OUT_1 to RD_OUT_5: Receive Data Output.
+- ERD: Event for RD_OUT_1 to RD_OUT_5.
+
+Time-control input (event): ROUND_START, TRANSMIT_TRG, SEND_RD. Those event inputs will control the timing of MIXER.
+- ROUND_START: used to start a new "round" or "time slot" of MIXER. This input shall be controlled by cyclic FBs (inside Mixer_Timer) and can be config via ROUND_CYC of Mixer_Timer.
+- SEND_RD: used to trigger ERD and send data inside to RD_OUT_x. This input also could be controlled by cyclic FBs (inside Mixer_TImer and can be config via RD_TRG_CYCof Mixer_Timer.
+- TRANSMIT_TRG: used to send data to PUBLISH and send to the network. Note: ESD output event of Mixer_Main must connect to ESD input event of Mixer_Timer. This parameter are advised to configure around 40% to 80% of ROUND_CYC.
+    
+Transmission and Reception config:
+- Connection to PUBLISH_1: SD_OUT -> SD_1, ESD -> REQ, INITO -> INIT (optional).
+- Connection to SUBCRIBE_1: RD_1 -> RD_IN, IND ->REG_RD, INITO -> INIT (optional.
+    
+Other configuration:
+- ID of SUBCRIBE_1 and PUBLISH_1 shall be the same for all "devices" within a system. For example: "225.0.0.1:61499"
+- QI of SUBCRIBE_1 and PUBLISH_1 shall be set to 1.
+- ROUND_CYC and TX_DELAY_TRG also shall be the same for all "devices" within a system. RX_TRG_CYC; however, can be varied as it does not affect MIXER timing and operation.
+- NodeID of Mixer_Main: each device shall have a unique ID within the system.
+- Total Node: shall be the same for all "devices". This parameter gives information on deciding whether this round is transmitted or received.
+- RD_OUT_ID, SD_IN_ID: Port ID of RD_OUT_x and SD_IN_x. Shall be unique within the whole system. Each port ID shall be separated by ",". There is no limit on how many ports shall be config; however, only 5 first numbers will be considered inside Mixer cooperation and non-configuration ports will have ID = 0.
 
 The graph below describes how the system over time.
 ![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/f277dbc5-16c4-4cfc-b765-726aca59e442)
 
+## Data Structure
+- Buffer Structure:
+![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/66c2e2fb-dd85-4086-8c3e-c29d768fc135)
+
+- Main Central Data Matrix:
+![image](https://github.com/TuyetHan/DistributedWirelessControl/assets/44611883/2d1d4491-c9c2-4edc-ab6f-a1f0fafa3247)
+
+- Tx and Rx Message: Same with Main Central Data Matrix but only have 4 row, and without FLAGs.
+  
 ## Running Tests
 
 This project will be tested on Beagle Bone Black Industrial. The following steps shall be taken to prepare BBB.
