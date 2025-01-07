@@ -129,6 +129,8 @@ This project will be tested on Beagle Bone Black Industrial. The following steps
   - Note: Need to find ssh location in your computer and replace accordingly, also "192.168.7.2" also shall be replaced by BBB default address (if you already changed it)
 ```
 
+Thanks to Professor [Dominik Baumann](https://baumanndominik.github.io/) for supporting me in this project
+
 
 
 
